@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrono Atlas </title>
+    <link rel="stylesheet" href="/style.css">
+    
+</head>
+<body>
+    
+    <header>
+        <nav>
+            <h1>Start Planning your week</h1>
+            <a href="/">Home |</a> 
+            <a href="/tasks">All tasks |</a> 
+            <%  if (user !== null) { %>
+                Welcome, <%= user.username %>
+                <a href="/tasks/new">Create a new task |</a>               
+            <%  } %>
+            <br>
+
+            <%  if (user !== null) { %>
+                Welcome, <%= user.username %>
+                <a href="/auth/logout">Logout |</a>                
+            <%  } else { %>
+            <a href="/auth/signup">Sign up |</a>
+            <a href="/auth/login">Login |</a>
+            <% } %>
+
+<br>
+            
+
+
+        
+        </nav>
+        
+    </header>
+
+    <main>
