@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt')
 //* Sign-up form 
 
 router.get("/signup", (req,res) => {
-    res.render("auth/signup")
+    res.render("auth/signup.ejs")
 })
 
 
