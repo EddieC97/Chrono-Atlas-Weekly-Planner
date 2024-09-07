@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 
-app.set('View engine', "ejs")
+app.set("View engine", "ejs")
 
 app.use(express.static("public"))
 
@@ -33,9 +33,11 @@ app.use((req, res, next) => {
     next()
 })
 
-//! INITIALISE MONGOOSE DB CONNECTION AND MODELS HERE 
+
 const mongoose = require("mongoose")
-//!
+const User = require('./models/User.js')
+
+require('dotenv').config()
 
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('open', () => {
@@ -43,9 +45,11 @@ mongoose.connection.on('open', () => {
 })
 
 app.get('/', (req,res) => {
-    res.render('home')
+    
+    res.render('home.ejs')
 })
 
+//* Load this from our separate controller file 
 const authController = require('./controllers/auth.js')
 app.use('/auth', authController)
 

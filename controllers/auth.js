@@ -11,3 +11,7 @@ const bcrypt = require('bcrypt')
 router.get("/signup", (req,res) => {
     res.render("auth/signup")
 })
+
+
+//! remember to add this or else server can't connect 
+module.exports = router;
