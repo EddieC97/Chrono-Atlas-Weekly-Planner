@@ -46,8 +46,7 @@ app.get('/', (req,res) => {
     res.render('home')
 })
 
-const authController = require('/controllers/auth.js')
-
+const authController = require('./controllers/auth.js')
 app.use('/auth', authController)
 
 function isLoggedIn (req,res,next) {
