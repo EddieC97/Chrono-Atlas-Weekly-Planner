@@ -14,7 +14,7 @@ router.get("/signup", (req,res) => {
 
 router.post('/signup' , async (req,res) => {
 
-    const UserInDatabase = await User.findOne({Username: req.body.username})
+    const UserInDatabase = await User.findOne({username: req.body.username})
 
     if(UserInDatabase !== null) {
         res.render("auth/signup.ejs", {
@@ -25,8 +25,8 @@ router.post('/signup' , async (req,res) => {
     }
 
     if (req.body.password !== req.body.passwordConfirmation){
-        res,rednder("/auth/signup.ejs", {
-            errorMessage: `Your passwords don't match. Please try again` ,
+        res.render("auth/signup.ejs", {
+            errorMessage: `Your passwords don't match. Please try again!` ,
             username:req.body.username
         })
         return;
