@@ -6,18 +6,18 @@ type: String,
 
 const taskSchema = new mongoose.Schema(
 {
-    Title: {
+    title: {
     type: String,
     required: true,
     },
-    Descriptions: [descriptionSchema],
+    descriptions: [descriptionSchema],
 
-    Category: {
+    category: {
     type: String, 
     required: true,
     },
 
-    Owner: {
+    owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,

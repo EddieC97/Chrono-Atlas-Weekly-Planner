@@ -2,7 +2,7 @@
 
 <h2> Create a new task</h2>
 
-<form action="/tasks/new" method="post">
+<form action="/task" method="post">
 
 
 <% if(locals.errorMessage) { %>
@@ -19,7 +19,7 @@
 <label for="Description"> Description:</label>
 <input type="text" id="DescriptionInput" name="description" value="<%= locals.description %>">
 <br>
-<label for="category"> Please select where you would like to store the task</label>
+<label for="category" name="category"> Please select where you would like to store the task</label>
 <select id="category">
     <option value="2nd brain">2nd brain category</option>
     <option value="weekly tasks">Weekly task category</option>

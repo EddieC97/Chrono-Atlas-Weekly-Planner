@@ -9,25 +9,26 @@ const Task = require('../models/Task')
 //* CREATE
 
 router.get('/new', (req,res) => {
+    
     res.render("tasks/new.ejs")
 
 
 })
 
-router.post('/' ,async (req,res) => {
+router.post('/' , async (req, res) => {
     // const description = await Task.create({
     //     description: req.body.description
     // })
 
     const newTask = await Task.create({
-        Title: req.body.title,
-        Description: req.body.description,
-        Category: req.body.category,
-        Owner: req.session.user._id
+        title: req.body.title,
+        description: [req.body.description],
+        category: req.body.category,
+        owner: req.session.User._id
 
     });
-
-    res.redirect('/tasks')
+    res.send('info received')
+    // res.redirect('/task')
 })
 
 
