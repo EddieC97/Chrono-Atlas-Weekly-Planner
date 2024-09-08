@@ -15,13 +15,11 @@
             <a href="/">Home |</a> 
             <a href="/tasks">All tasks |</a> 
             <%  if (user !== null) { %>
-                Welcome, <%= user.username %>
                 <a href="/tasks/new">Create a new task |</a>               
             <%  } %>
             <br>
 
             <%  if (user !== null) { %>
-                Welcome, <%= user.username %>
                 <a href="/auth/logout">Logout |</a>                
             <%  } else { %>
             <a href="/auth/signup">Sign up |</a>

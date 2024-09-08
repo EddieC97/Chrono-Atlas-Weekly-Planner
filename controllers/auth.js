@@ -96,7 +96,7 @@ router.get('/logout', (req,res) => {
 })
 //TODO - Finish Login page 
 
-//TODO - make sure username is display in welcome message when user log in  
+
 //TODO - make mistake for username + password during login to check routes working as intended
 
 

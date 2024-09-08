@@ -1,14 +1,19 @@
 <%- include('partials/header')  %>
 
-<h2> Welcome to Chrono Atlas: your favorite weekly planner</h2>
+<% if (user) { %>
+    <h2>Welcome, <%= user.username %><h2>
+<% } else { %>
+
+    <h2> Welcome to Chrono Atlas: your favorite weekly planner</h2>
+
+<% } %>
+
+
 
 <p>Go ahead and start planning your week!</p>
 
-<% console.log(user) %>
 
-<% if (user) { %>
-    <h2>Welcome, <%= user.username %><h2>
-<% } %>
+
 
 
 
