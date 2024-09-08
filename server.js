@@ -53,6 +53,10 @@ app.get('/', (req,res) => {
 const authController = require('./controllers/auth.js')
 app.use('/auth', authController)
 
+//* Load this from our separate controller file 
+const taskController = require("./controllers/task.js")
+app.use('/task', taskController)
+
 function isLoggedIn (req,res,next) {
 
     if(req.session.user){

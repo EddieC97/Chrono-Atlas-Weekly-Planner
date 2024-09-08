@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const descriptionSchema = new mongoose.Schema({
 type: String,
-required: true,
 });
 
 const taskSchema = new mongoose.Schema(
@@ -12,10 +11,10 @@ const taskSchema = new mongoose.Schema(
     required: true,
     },
     Descriptions: [descriptionSchema],
-    
+
     Category: {
     type: String, 
-    required: true 
+    required: true,
     },
 
     Owner: {

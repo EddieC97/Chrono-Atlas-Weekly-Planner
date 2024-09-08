@@ -1,0 +1,34 @@
+<%- include('../partials/header')  %>
+
+<h2> Create a new task</h2>
+
+<form action="/task/new" method="post">
+
+
+<% if(locals.errorMessage) { %>
+    <div class="Error">
+        <%= errorMessage  %>
+    </div>
+<% } %>
+
+
+<label for="Title"> Title:</label>
+<input type="text" id="titleInput" name="title" value="<%= locals.title  %>">
+<br>
+
+<label for="Description"> Description:</label>
+<input type="text" id="DescriptionInput" name="description" value="<%= locals.description %>">
+<br>
+<label for="category"> Please select where you would like to store the task</label>
+<select id="category">
+    <option value="2nd brain">2nd brain category</option>
+    <option value="weekly tasks">Weekly task category</option>
+</select>
+
+<br>
+<button>Create your tasks!</button>
+
+</form>
+
+
+<%- include ('../partials/footer')  %>
