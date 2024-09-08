@@ -45,7 +45,7 @@ mongoose.connection.on('open', () => {
 })
 
 app.get('/', (req,res) => {
-    
+
     res.render('home.ejs')
 })
 

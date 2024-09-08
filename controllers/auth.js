@@ -5,6 +5,7 @@ const router = express.Router()
 const User = require('../models/User')
 
 const bcrypt = require('bcrypt')
+const { userInfo } = require('os')
 
 //* Sign-up process
 
@@ -47,7 +48,54 @@ router.post('/signup' , async (req,res) => {
 
 })
 
+//* LOGIN PROCESS
+router.get("/login", (req, res) => {
+
+    res.render('auth/login.ejs', {helperMessage: req.query.message})
+
+})
+
+router.post('/login', async (req,res) => {
+
+    const UserInDatabase = await User.findOne({username: req.body.username})
+
+    if (UserInDatabase === null) {
+        res.render('auth/login', {
+            errorMessage: " No such account with this email address. Perhaps you mistyped it?",
+            username: req.body.username
+        });
+        return;
+    }
+
+    if(bcrypt.compareSync (req.body.password, UserInDatabase.password) === false) {
+        res.render('auth/login', {
+            errorMessage: "Incorrect password. Perhaps you mistyped it?", 
+            username: req.body.username
+        });
+        return;
+    }
+
+    req.session.user ={
+        username: UserInDatabase.email,
+        id: UserInDatabase.id
+    }
+
+    req.session.save( ()=> {
+        res.redirect('/')
+    })
+
+})
+
+//* LOGOUT PROCESS
+
+
+router.get('/logout', (req,res) => {
+    req.session.destroy();
+    res.redirect('/')
+})
 //TODO - Finish Login page 
+//TODO - make sure after sign up- we redirect to user profile(help them sign in)
+//TODO - make sure username is display in welcome message when user log in 
 
 
 

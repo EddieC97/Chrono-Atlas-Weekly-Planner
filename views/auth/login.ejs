@@ -1,0 +1,33 @@
+<%- include('../partials/header')  %>
+
+<h2> Login</h2>
+
+<form action="/auth/login" method="post">
+
+
+<% if(locals.errorMessage) { %>
+    <div class="Error">
+        <%= errorMessage  %>
+    </div>
+<% } %>
+
+<% if(locals.helperMessage) { %>
+    <div class="helper">
+        You need to be logged in to access that page.
+    </div>
+<% } %>
+
+<label for="username"> Username:</label>
+<input type="text" id="usernameInput" name="username" value="<%= locals.username  %>">
+<br>
+
+<label for="passwordInput"> Password:</label>
+<input type="password" id="passwordInput" name="password">
+<br>
+
+<button>Login!</button>
+
+</form>
+
+
+<%- include ('../partials/footer')  %>

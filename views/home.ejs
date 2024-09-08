@@ -5,5 +5,10 @@
 <p>Go ahead and start planning your week!</p>
 
 
+<% if (user) { %>
+    <h2>Welcome, <%= user.username %><h2>
+<% } %>
+
+
 
 <%- include ('partials/footer')  %>
