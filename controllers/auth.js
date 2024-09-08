@@ -74,9 +74,10 @@ router.post('/login', async (req,res) => {
         });
         return;
     }
+    
 
-    req.session.user ={
-        username: UserInDatabase.email,
+    req.session.user = {
+        username: UserInDatabase.username,
         id: UserInDatabase.id
     }
 
@@ -94,8 +95,9 @@ router.get('/logout', (req,res) => {
     res.redirect('/')
 })
 //TODO - Finish Login page 
-//TODO - make sure after sign up- we redirect to user profile(help them sign in)
-//TODO - make sure username is display in welcome message when user log in 
+
+//TODO - make sure username is display in welcome message when user log in  
+//TODO - make mistake for username + password during login to check routes working as intended
 
 
 
