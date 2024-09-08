@@ -60,7 +60,7 @@ router.post('/login', async (req,res) => {
     const UserInDatabase = await User.findOne({username: req.body.username})
 
     if (UserInDatabase === null) {
-        res.render('auth/login', {
+        res.render('auth/login.ejs', {
             errorMessage: " No such account with this email address. Perhaps you mistyped it?",
             username: req.body.username
         });
@@ -68,7 +68,7 @@ router.post('/login', async (req,res) => {
     }
 
     if(bcrypt.compareSync (req.body.password, UserInDatabase.password) === false) {
-        res.render('auth/login', {
+        res.render('auth/login.ejs', {
             errorMessage: "Incorrect password. Perhaps you mistyped it?", 
             username: req.body.username
         });
