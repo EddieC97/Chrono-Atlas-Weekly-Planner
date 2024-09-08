@@ -1,0 +1,23 @@
+<%- include('../partials/header')  %>
+
+<h2> All Tasks</h2>
+
+
+
+
+<ul>
+<% for (const task of tasks) { %>
+
+<li>
+    <a href="/task/<%= task.id %>"><%= task.title %></a>
+    
+
+</li>
+
+<% } %>
+
+</ul>
+
+
+
+<%- include ('../partials/footer')  %>
