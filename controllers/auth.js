@@ -44,7 +44,14 @@ router.post('/signup' , async (req,res) => {
         
     })
 
-    res.redirect("/")
+    req.session.user = {
+        username: createUser.username,
+        id: createUser.id
+    }
+
+    req.session.save( ()=> {
+        res.redirect('/')
+    })
 
 })
 
@@ -61,7 +68,7 @@ router.post('/login', async (req,res) => {
 
     if (UserInDatabase === null) {
         res.render('auth/login.ejs', {
-            errorMessage: " No such account with this email address. Perhaps you mistyped it?",
+            errorMessage: " No such account with this username. Perhaps you mistyped it?",
             username: req.body.username
         });
         return;
@@ -94,11 +101,6 @@ router.get('/logout', (req,res) => {
     req.session.destroy();
     res.redirect('/')
 })
-//TODO - Finish Login page 
-
-
-//TODO - make mistake for username + password during login to check routes working as intended
-
 
 
 
