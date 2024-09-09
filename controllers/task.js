@@ -29,8 +29,8 @@ router.post('/' , async (req, res) => {
         owner: req.session.user._id
 
     });
-    res.send('info received')
-    // res.redirect('/task')
+
+    res.redirect('/task')
 })
 
 

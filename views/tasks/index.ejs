@@ -9,9 +9,16 @@
 <% for (const task of tasks) { %>
 
 <li>
-    <a href="/task/<%= task.id %>"><%= task.title %></a>
+    <a href="/task/<%= task.id %>">
+        <h3> Title: <%= task.title %></h3>
+    </a>
+    <h3>Description:
+        <% for (const description of task.description) { %>
+            <%= description.type %>
+        <% } %>
+    </h3>
+    <h3>Category: <%= task.category %></h3> 
     
-
 </li>
 
 <% } %>
