@@ -12,9 +12,9 @@
 <h2>Category: <%= task.category %></h2>
 
 
-<a href="/task/<%= task.id %>/edit">Edit this task</a>
+<a href="/tasks/<%= task.id %>/edit">Edit this task</a>
 <br>
-<form action="/task/<%= task.id %>?_method=delete" method="post">
+<form action="/tasks/<%= task.id %>?_method=delete" method="post">
     <button>Delete this task </button>
 
 </form>

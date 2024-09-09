@@ -55,7 +55,7 @@ app.use('/auth', authController)
 
 //* Load this from our separate controller file 
 const taskController = require("./controllers/task.js")
-app.use('/task', taskController)
+app.use('/tasks', isLoggedIn, taskController)
 
 function isLoggedIn (req,res,next) {
 
@@ -66,4 +66,4 @@ function isLoggedIn (req,res,next) {
     }
 
 }   
-//TODO - implement isLoggedIn as route protection later 
+

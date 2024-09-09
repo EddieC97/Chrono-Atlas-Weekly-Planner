@@ -26,11 +26,11 @@ router.post('/' , async (req, res) => {
         title: req.body.title,
         description: [descriptionData],
         category: req.body.category,
-        owner: req.session.user._id
+        owner: req.session.user.id
 
     });
 
-    res.redirect('/task')
+    res.redirect('/tasks')
 })
 
 
@@ -78,7 +78,7 @@ router.put('/:id', async (req,res) => {
         { new: true }
     )
 
-    res.redirect(`/task/${req.params.id}`)
+    res.redirect(`/tasks/${req.params.id}`)
 })
 
 //TODO - make path more secure 
@@ -89,7 +89,7 @@ router.put('/:id', async (req,res) => {
 router.delete('/:id', async (req,res) => {
     
     const task = await Task.findByIdAndDelete(req.params.id)
-    res.redirect('/task')
+    res.redirect('/tasks')
 
  
     // if(task.owner.equals(req.session.user._id)) {

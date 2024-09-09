@@ -3,7 +3,7 @@
 <h2> Edit your task here</h2>
 <% console.log(task.id) %>
 
-<form action="/task/<%=task.id %>?_method=put" method="post">
+<form action="/tasks/<%=task.id %>?_method=put" method="post">
 
 
 <% if(locals.errorMessage) { %>
