@@ -2,46 +2,46 @@
 
 <h2>All Tasks</h2>
 
+<div class="container">
+    <div class="tasks">
+        <ol>
+            <h3>2nd Brain Tasks:</h3>
+            <% for (const task of secondBrain) { %>
+                <li>
+                    <a href="/task/<%= task.id %>">
+                        <h4>Title: <%= task.title %></h4>
+                        <h3>Description: 
+                            <% for (const description of task.description) { %> 
+                            <%= description.type %> 
+                            <% } %>
+                        </h3>
+                        <h3>Category: <%= task.category %></h3>
+                    </a>
+                </li>
+            <% } %>
+        </ol>
 
-<ol>
-    <h3>2nd Brain Tasks:</h3>
-    <% for (const task of secondBrain) { %>
-        <li>
-            <a href="/task/<%= task.id %>">
-                <h4>Title: <%= task.title %></h4>
-                <h3>Description: 
-                    <% for (const description of task.description) { %> 
-                    <%=description.type %> 
-                    <% } %>
-                </h3>
-                <h3>Category: <%= task.category %></h3>
-            </a>
-        
+        <ol>
+            <h3>Weekly Tasks:</h3>
+            <% for (const task of weeklyTask) { %> 
+                <li>
+                    <a href="/task/<%= task.id %>">
+                        <h4>Title: <%= task.title %></h4>
+                        <h3>Description: 
+                            <% for (const description of task.description) { %> 
+                            <%= description.type %> 
+                            <% } %>
+                        </h3>
+                        <h3>Category: <%= task.category %></h3>
+                    </a>
+                </li>
+            <% } %>
+        </ol>
+    </div>
 
-        </li>
-    <% } %>
-</ol>
-
-<ol>
-    <h3>Weekly Tasks:</h3>
-    <% for (const task of weeklyTask) { %> 
-        <li>
-            <a href="/task/<%= task.id %>">
-                <h4>Title: <%= task.title %></h4>
-                <h3>Description: 
-                    <% for (const description of task.description) { %> 
-                    <%=description.type %> 
-                    <% } %>
-                </h3>
-                <h3>Category: <%= task.category %></h3>
-            </a>
-        </li>
-    <% } %>
-    
-</ol>
-
-
-
-<%- include ('../calendar/weekly') %>
+    <div class="calendar">
+        <%- include ('../calendar/weekly') %>
+    </div>
+</div>
 
 <%- include ('../partials/footer') %>

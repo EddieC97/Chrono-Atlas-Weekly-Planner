@@ -5,6 +5,18 @@ table {
     background: yellow;
 
 }
+.container {
+    display:flex;
+    justify-content: space-between;
+}
+
+.task {
+    flex:2;
+    margin-right: 20px
+}
+.calendar {
+    flex:1;
+}
 
 
 th {
