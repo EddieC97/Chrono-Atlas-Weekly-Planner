@@ -51,6 +51,36 @@ router.get('/:id', async (req,res) => {
 
 //* UPDATE
 
+router.get("/:id/edit", async (req,res) => {
+    const task = await Task.findById(req.params.id)
+    res.render('tasks/edit.ejs', {task})
+    //TODO- implement better security for edit 
+})
+
+router.put('/:id', async (req,res) => {
+    const task = await Task.findById(req.params.id)
+
+    const updatedDescription = {
+        type: req.body.description,
+    }
+
+    const updatedTask = await Task.findByIdAndUpdate(
+        req.params.id,
+        { 
+            title:req.body.title,
+            description:[updatedDescription],
+            category:req.body.category
+
+        },
+        { new: true }
+    )
+
+    res.redirect(`/task/${req.params.id}`)
+})
+
+//TODO - make path more secure 
+
+
 //* DELETE
 
 router.delete('/:id', async (req,res) => {

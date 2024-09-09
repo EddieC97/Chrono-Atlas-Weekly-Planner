@@ -1,0 +1,41 @@
+<%- include('../partials/header')  %>
+
+<h2> Edit your task here</h2>
+<% console.log(task.id) %>
+
+<form action="/task/<%=task.id %>?_method=put" method="post">
+
+
+<% if(locals.errorMessage) { %>
+    <div class="Error">
+        <%= locals.errorMessage  %>
+    </div>
+<% } %>
+
+
+<label for="Title"> Title:</label>
+<input type="text" id="titleInput" name="title" value="<%= task.title  %>">
+<br>
+
+<label for="Description"> Description:</label>
+<% for (description of task.description) { %>
+    <input type="text" id="DescriptionInput" name="description" value="<%= description.type %>">
+<% } %>
+
+
+<br>
+<label for="category" > Please select where you would like to store the task</label>
+<select id="category" name="category">
+    <option value="2nd brain" <%= task.category === '2nd brain' ? 'selected' : '' %> >2nd brain category</option>
+    <option value="weekly tasks" <%= task.category === 'weekly tasks' ? 'selected' : '' %> >Weekly task category </option>
+</select>
+
+
+
+<br>
+<button>Edit!</button>
+
+</form>
+
+
+<%- include ('../partials/footer')  %>
