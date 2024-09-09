@@ -41,6 +41,12 @@ router.get('/', async (req, res) => {
     res.render("tasks/index.ejs", {tasks})
 })
 
+router.get('/:id', async (req,res) => {
+    const task = await Task.findById(req.params.id)
+
+    res.render('tasks/show.ejs', {task})
+})
+
 
 
 //* UPDATE
