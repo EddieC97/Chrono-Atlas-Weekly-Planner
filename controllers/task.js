@@ -38,16 +38,57 @@ router.post('/' , async (req, res) => {
 
 router.get('/', async (req, res) => {
 
-    const secondBrain = await Task.find({category: `2nd brain`})
-    const weeklyTask = await Task.find({category: 'weekly tasks'})
+    // const task = await Task.findById(req.params.id)
+    // if(task.owner.equals(req.session.user.id)) {
+    //     const secondBrain = await Task.find({category: `2nd brain`, owner:req.session.user.id})
+    //     const weeklyTask = await Task.find({category: 'weekly tasks', owner:req.session.user.id})
+
+    //     res.render("tasks/index.ejs", {secondBrain , weeklyTask})
+
+    // } else {
+    //     res.send('No viewing')
+
+    //* cannot read properties of null(reading: 'owner')
+
+    const secondBrain = await Task.find({category: `2nd brain`, owner:req.session.user.id})
+    const weeklyTask = await Task.find({category: 'weekly tasks', owner:req.session.user.id})
 
     res.render("tasks/index.ejs", {secondBrain , weeklyTask})
+
+
+
+    
+
+
+        
+    
+
+    
+
+    
+
+    
 })
 
 router.get('/:id', async (req,res) => {
+
+
     const task = await Task.findById(req.params.id)
 
-    res.render('tasks/show.ejs', {task})
+
+    if(task.owner.equals(req.session.user.id)) {
+        res.render('tasks/show.ejs', {task})
+
+    } else {
+        res.render("tasks/error404.ejs", {
+        errorMessage: `You don't have permission to view that! `
+        })
+        return
+
+    }
+
+
+    
 })
 
 
@@ -66,6 +107,7 @@ router.get("/:id/edit", async (req,res) => {
         res.render("tasks/error404.ejs", {
                 errorMessage: `You don't have permission to edit that! `
         })
+        return
     }
     
 })
@@ -98,6 +140,7 @@ router.put('/:id', async (req,res) => {
         res.render("tasks/error404.ejs", {
         errorMessage: `You don't have permission to edit that! `
         })
+        return
 
     }
 
@@ -124,6 +167,7 @@ router.delete('/:id', async (req,res) => {
         res.render("tasks/error404.ejs", {
             errorMessage: `You don't have permission to delete that! `
         })
+        return
     }
     
 
@@ -137,6 +181,7 @@ router.delete('/:id', async (req,res) => {
 module.exports = router;
 
 
+//TODO - figure out how to protect read routes: user1a can't see user2a stuff
+//* I think it is already protected so double check that because
+//* I can't see user2a stuff when logged in as user1a
 
-//TODO - add isLoggedIn into all routes for better security 
-//TODO - add owner check prior to edit + delete function 

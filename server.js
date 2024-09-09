@@ -71,3 +71,4 @@ function isLoggedIn (req,res,next) {
 //TODO - remember to do the README
 //TODO - add youtube video to error 404 
 //TODO - check if isLoggedIn fn else statement is showing the right message
+//* I think it is but need to double check 
