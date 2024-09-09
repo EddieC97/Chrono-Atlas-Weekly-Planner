@@ -16,13 +16,13 @@ router.get('/new', (req,res) => {
 })
 
 router.post('/' , async (req, res) => {
-    // const description = await Task.create({
-    //     description: req.body.description
-    // })
+    const descriptionData = {
+        description: req.body.description,
+    }
 
     const newTask = await Task.create({
         title: req.body.title,
-        description: [req.body.description],
+        description: [descriptionData],
         category: req.body.category,
         owner: req.session.User._id
 
@@ -51,3 +51,5 @@ router.get('/', async (req, res) => {
 
 
 module.exports = router;
+
+//TODO - update value for new.ejs for tasks for category to make sure it is displaying the right stuff
