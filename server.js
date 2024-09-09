@@ -67,3 +67,7 @@ function isLoggedIn (req,res,next) {
 
 }   
 
+//TODO - deploy to render.com 
+//TODO - remember to do the README
+//TODO - add youtube video to error 404 
+//TODO - check if isLoggedIn fn else statement is showing the right message

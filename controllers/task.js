@@ -56,53 +56,77 @@ router.get('/:id', async (req,res) => {
 
 router.get("/:id/edit", async (req,res) => {
     const task = await Task.findById(req.params.id)
-    res.render('tasks/edit.ejs', {task})
-    //TODO- implement better security for edit 
+
+    if(task.owner.equals(req.session.user.id)) {
+
+        const task = await Task.findById(req.params.id)
+        res.render('tasks/edit.ejs', {task})
+    
+    } else {
+        res.render("tasks/error404.ejs", {
+                errorMessage: `You don't have permission to edit that! `
+        })
+    }
+    
 })
+
+
 
 router.put('/:id', async (req,res) => {
     const task = await Task.findById(req.params.id)
 
-    const updatedDescription = {
-        type: req.body.description,
+    if(task.owner.equals(req.session.user.id)){
+
+        const updatedDescription = {
+            type: req.body.description,
+        }
+    
+        const updatedTask = await Task.findByIdAndUpdate(
+            req.params.id,
+            { 
+                title:req.body.title,
+                description:[updatedDescription],
+                category:req.body.category
+    
+            },
+            { new: true }
+        )
+    
+        res.redirect(`/tasks/${req.params.id}`)
+
+    } else {
+        res.render("tasks/error404.ejs", {
+        errorMessage: `You don't have permission to edit that! `
+        })
+
     }
 
-    const updatedTask = await Task.findByIdAndUpdate(
-        req.params.id,
-        { 
-            title:req.body.title,
-            description:[updatedDescription],
-            category:req.body.category
 
-        },
-        { new: true }
-    )
-
-    res.redirect(`/tasks/${req.params.id}`)
+    
 })
 
-//TODO - make path more secure 
+
 
 
 //* DELETE
 
 router.delete('/:id', async (req,res) => {
-    
+
+
+    const task = await Task.findById(req.params.id)
+
+    if(task.owner.equals(req.session.user.id)) {
+
     const task = await Task.findByIdAndDelete(req.params.id)
     res.redirect('/tasks')
 
- 
-    // if(task.owner.equals(req.session.user._id)) {
+    } else {
+        res.render("tasks/error404.ejs", {
+            errorMessage: `You don't have permission to delete that! `
+        })
+    }
+    
 
-    //     const task = await Task.findByIdAndDelete(req.params.id)
-    //     res.redirect('/task')
-
-    // } else {
-
-    //     res.send(`You don't have permission to delete this item`)
-
-    // }
-    //TODO - get this path working for better security 
 })
 
 
@@ -113,7 +137,6 @@ router.delete('/:id', async (req,res) => {
 module.exports = router;
 
 
-// TODO - ask Gareth how to link owner from Task.js from model into controller task.js. Currently if i let it in, 
-//will break the whole system 
+
 //TODO - add isLoggedIn into all routes for better security 
 //TODO - add owner check prior to edit + delete function 
