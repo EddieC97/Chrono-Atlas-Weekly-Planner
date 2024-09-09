@@ -37,8 +37,11 @@ router.post('/' , async (req, res) => {
 //* READ
 
 router.get('/', async (req, res) => {
-    const tasks = await Task.find()
-    res.render("tasks/index.ejs", {tasks})
+
+    const secondBrain = await Task.find({category: `2nd brain`})
+    const weeklyTask = await Task.find({category: 'weekly tasks'})
+
+    res.render("tasks/index.ejs", {secondBrain , weeklyTask})
 })
 
 router.get('/:id', async (req,res) => {
@@ -112,3 +115,5 @@ module.exports = router;
 
 // TODO - ask Gareth how to link owner from Task.js from model into controller task.js. Currently if i let it in, 
 //will break the whole system 
+//TODO - add isLoggedIn into all routes for better security 
+//TODO - add owner check prior to edit + delete function 
