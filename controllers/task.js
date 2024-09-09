@@ -17,14 +17,16 @@ router.get('/new', (req,res) => {
 
 router.post('/' , async (req, res) => {
     const descriptionData = {
-        description: req.body.description,
+        type: req.body.description,
     }
+
+    
 
     const newTask = await Task.create({
         title: req.body.title,
         description: [descriptionData],
         category: req.body.category,
-        owner: req.session.User._id
+        owner: req.session.user._id
 
     });
     res.send('info received')
@@ -52,4 +54,6 @@ router.get('/', async (req, res) => {
 
 module.exports = router;
 
-//TODO - update value for new.ejs for tasks for category to make sure it is displaying the right stuff
+
+// TODO - ask Gareth how to link owner from Task.js from model into controller task.js. Currently if i let it in, 
+//will break the whole system 

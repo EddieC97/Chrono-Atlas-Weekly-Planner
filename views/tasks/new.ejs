@@ -7,7 +7,7 @@
 
 <% if(locals.errorMessage) { %>
     <div class="Error">
-        <%= errorMessage  %>
+        <%= locals.errorMessage  %>
     </div>
 <% } %>
 
@@ -19,10 +19,10 @@
 <label for="Description"> Description:</label>
 <input type="text" id="DescriptionInput" name="description" value="<%= locals.description %>">
 <br>
-<label for="category" name="category"> Please select where you would like to store the task</label>
-<select id="category">
-    <option value="2nd brain">2nd brain category</option>
-    <option value="weekly tasks">Weekly task category</option>
+<label for="category" > Please select where you would like to store the task</label>
+<select id="category" name="category">
+    <option value="2nd brain">2nd brain category<%= locals.category === '2nd brain' ? 'selected' : '' %></option>
+    <option value="weekly tasks">Weekly task category <%= locals.category === 'Weekly task category' ? 'selected' : '' %></option>
 </select>
 
 <br>

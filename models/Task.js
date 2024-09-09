@@ -10,7 +10,7 @@ const taskSchema = new mongoose.Schema(
     type: String,
     required: true,
     },
-    descriptions: [descriptionSchema],
+    description: [descriptionSchema],
 
     category: {
     type: String, 
@@ -20,7 +20,7 @@ const taskSchema = new mongoose.Schema(
     owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true,
+    
     },
 },
 { timestamps: true }
