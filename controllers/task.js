@@ -53,6 +53,25 @@ router.get('/:id', async (req,res) => {
 
 //* DELETE
 
+router.delete('/:id', async (req,res) => {
+    
+    const task = await Task.findByIdAndDelete(req.params.id)
+    res.redirect('/task')
+
+ 
+    // if(task.owner.equals(req.session.user._id)) {
+
+    //     const task = await Task.findByIdAndDelete(req.params.id)
+    //     res.redirect('/task')
+
+    // } else {
+
+    //     res.send(`You don't have permission to delete this item`)
+
+    // }
+    //TODO - get this path working for better security 
+})
+
 
 
 
