@@ -1,5 +1,5 @@
 //* This gets the format function from date-fns
-const {format, addDays, addWeeks, subWeeks} = require('date-fns')
+const {format, addDays, addWeeks, startOfWeek} = require('date-fns')
 
 
 

@@ -49,6 +49,10 @@ app.get('/', (req,res) => {
     res.render('home.ejs')
 })
 
+const calendarController = require('./controllers/calendar.js')
+app.use('/calendars', calendarController)
+//TODO - make sure it can display in the index.ejs file properly 
+
 //* Load this from our separate controller file 
 const authController = require('./controllers/auth.js')
 app.use('/auth', authController)
