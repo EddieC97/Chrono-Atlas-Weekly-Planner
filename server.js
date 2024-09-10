@@ -49,9 +49,7 @@ app.get('/', (req,res) => {
     res.render('home.ejs')
 })
 
-const calendarController = require('./controllers/calendar.js')
-app.use('/calendars', calendarController)
-//TODO - make sure it can display in the index.ejs file properly 
+
 
 //* Load this from our separate controller file 
 const authController = require('./controllers/auth.js')
@@ -60,6 +58,10 @@ app.use('/auth', authController)
 //* Load this from our separate controller file 
 const taskController = require("./controllers/task.js")
 app.use('/tasks', isLoggedIn, taskController)
+
+const calendarController = require('./controllers/calendar.js')
+app.use('/calendars', isLoggedIn, calendarController)
+//TODO - make sure it can display in the index.ejs file properly 
 
 function isLoggedIn (req,res,next) {
 

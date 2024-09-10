@@ -35,7 +35,7 @@ router.post('/', async (req,res) => {
 
         const newCalendarWeek = await Calendar.create({
             title:req.body.title,
-            date: dateCheck,
+            date: req.body.date,
             owner:req.session.user.id
         })
     
@@ -55,7 +55,6 @@ router.post('/', async (req,res) => {
 
     }
     
-
 })
 
 //* READ
@@ -73,7 +72,7 @@ router.get("/:id", async (req,res) => {
 
     const dateFormat = 'dd/MM/yyyy'
     const today = parse(week.date, dateFormat, new Date())
-    console.log(today)
+    
 
     
     /*  we cannot pass the week.date directly into the date-fns function 
