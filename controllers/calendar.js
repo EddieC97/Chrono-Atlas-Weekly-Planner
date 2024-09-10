@@ -8,14 +8,14 @@ const Task = require("../models/Task");
 
 const Calendar = require("../models/Calendar")
 
-const { format, addDays, addWeeks, startOfWeek, parse, isValid } = require("date-fns");
+const { format, addDays, startOfWeek, parse, isValid } = require("date-fns");
 
-//* checking dates to display below the days
+
+
+
+
 
 //* CREATE
-
-
-
 
 router.get('/new' , (req,res) => {
     res.render("calendar/new.ejs")
@@ -27,9 +27,13 @@ router.post('/', async (req,res) => {
 
     const dateCheck = parse(req.body.date, 'dd/MM/yyyy', new Date())
 
-    if(isValid(dateCheck)){
 
-        const newCalendar = await Calendar.create({
+    if(isValid(dateCheck)){
+        // isValid(Boolean) checks if the date exists,
+        //If it exits, then it will return true
+        
+
+        const newCalendarWeek = await Calendar.create({
             title:req.body.title,
             date: dateCheck,
             owner:req.session.user.id
@@ -51,10 +55,6 @@ router.post('/', async (req,res) => {
 
     }
     
-
-
-
-
 
 })
 
