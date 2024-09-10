@@ -26,7 +26,9 @@ router.post('/' , async (req, res) => {
         title: req.body.title,
         description: [descriptionData],
         category: req.body.category,
-        owner: req.session.user.id
+        owner: req.session.user.id, 
+        week:req.body.week,
+        day:req.body.day
 
     });
 

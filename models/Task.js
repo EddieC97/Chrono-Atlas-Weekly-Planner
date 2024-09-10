@@ -23,6 +23,13 @@ const taskSchema = new mongoose.Schema(
     required:true,
     
     },
+    week: {
+        type:String
+    },
+    
+    day: {
+        type: String
+    }
 },
 { timestamps: true }
 );

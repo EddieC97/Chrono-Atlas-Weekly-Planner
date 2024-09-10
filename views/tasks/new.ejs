@@ -11,10 +11,7 @@
     </div>
 <% } %>
 
-<% if(locals.category === 'calendar tasks'){
-    
 
-} %>
 
 
 <label for="Title"> Title:</label>
@@ -29,23 +26,20 @@
     <option value="2nd brain">2nd brain category<%= locals.category === '2nd brain' ? 'selected' : '' %></option>
     <option value="weekly tasks">Weekly task category <%= locals.category === 'Weekly task category' ? 'selected' : '' %></option>
     <option value="calendar tasks" > Calendar task category <%= locals.category === 'calendar tasks' ? 'selected' : '' %></option>
-    <div id="calendar Options" style="display:block">
-        week 1 
-            Monday 
-            Tuesday 
-            Wednesday 
-            Thursday 
-            Friday 
-        2025
-        2026
-
-    
-
-        <h2>showing calendar view </h2>
-    </div>
 </select>
 
+<div id="calendarOptions" style="display:block">
+    <label for="week">Select a week:</label>
+    <select id="'week" name="week">
+        <option value="week1"> Week 1</option>
+    </select>
+    <br>
+    <label for="day">Select a day</label>
+    <select id="day" name="day">
+        <option value="Monday">Monday</option>
+    </select>
 
+</div>
 
 <br>
 <button>Create your tasks!</button>
