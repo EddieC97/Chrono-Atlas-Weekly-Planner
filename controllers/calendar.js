@@ -32,7 +32,8 @@ router.post('/', async (req,res) => {
 //* READ
 
 router.get('/', async (req,res) => {
-    const 
+    const weekIndex = await Calendar.find()
+    res.render("calendar/index.ejs", {weekIndex})
 })
 
 
