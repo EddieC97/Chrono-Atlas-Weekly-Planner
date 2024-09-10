@@ -8,25 +8,54 @@ const Task = require("../models/Task");
 
 const Calendar = require("../models/Calendar")
 
-const { format, addDays, addWeeks, startOfWeek, parse } = require("date-fns");
+const { format, addDays, addWeeks, startOfWeek, parse, isValid } = require("date-fns");
 
 //* checking dates to display below the days
 
 //* CREATE
+
+
+
 
 router.get('/new' , (req,res) => {
     res.render("calendar/new.ejs")
 })
 
 
-router.post('/', async (req,res) => {
-    const newCalendar = await Calendar.create({
-        title:req.body.title,
-        date: req.body.date,
-        owner:req.session.user.id
-    })
 
-    res.redirect('/calendars')
+router.post('/', async (req,res) => {
+
+    const dateCheck = parse(req.body.date, 'dd/MM/yyyy', new Date())
+
+    if(isValid(dateCheck)){
+
+        const newCalendar = await Calendar.create({
+            title:req.body.title,
+            date: dateCheck,
+            owner:req.session.user.id
+        })
+    
+        res.redirect('/calendars')
+
+
+    } else {
+
+        res.render('calendar/new.ejs', {
+            errorMessage:`Please enter a valid date with the format of dd/MM/YYYY 
+            For example: 01/01/2024`,
+            title:req.body.title
+            
+
+        })
+        return;
+
+    }
+    
+
+
+
+
+
 })
 
 //* READ
@@ -117,9 +146,4 @@ router.get("/:id", async (req,res) => {
 
 
 
-
-
-
-
 module.exports = router;
-// TODO- check validation for dates 
