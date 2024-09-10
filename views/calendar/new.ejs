@@ -1,0 +1,31 @@
+<%- include('../partials/header')  %>
+
+<h2> Create a new week</h2>
+
+<form action="/calendars" method="post">
+
+
+<% if(locals.errorMessage) { %>
+    <div class="Error">
+        <%= locals.errorMessage  %>
+    </div>
+<% } %>
+
+
+<label for="Title"> Title:</label>
+<input type="text" id="titleInput" name="title" value="<%= locals.title  %>">
+<br>
+
+<label for="date"> Date for the starting Monday:</label>
+<input type="text" id="DatenInput" name="date" value="<%= locals.date %>">
+
+
+
+
+<br>
+<button>Create your Week!</button>
+
+</form>
+
+
+<%- include ('../partials/footer')  %>

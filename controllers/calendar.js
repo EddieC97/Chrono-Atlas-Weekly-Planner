@@ -6,14 +6,36 @@ const User = require("../models/User");
 
 const Task = require("../models/Task");
 
+const Calendar = require("../models/Calendar")
+
 const { format, addDays, addWeeks, startOfWeek } = require("date-fns");
 
 //* checking dates to display below the days
 
+//* CREATE
+
+router.get('/new' , (req,res) => {
+    res.render("calendar/new.ejs")
+})
 
 
+router.post('/', async (req,res) => {
+    const newCalendar = await Calendar.create({
+        title:req.body.title,
+        date: req.body.date,
+        owner:req.session.user.id
+    })
 
-//* show selected day
+    res.redirect('/calendars')
+})
+
+//* READ
+
+router.get('/', async (req,res) => {
+    const 
+})
+
+
 
 
 
