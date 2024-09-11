@@ -25,18 +25,30 @@
 <select id="category" name="category">
     <option value="2nd brain">2nd brain category<%= locals.category === '2nd brain' ? 'selected' : '' %></option>
     <option value="weekly tasks">Weekly task category <%= locals.category === 'Weekly task category' ? 'selected' : '' %></option>
-    <option value="calendar tasks" > Calendar task category <%= locals.category === 'calendar tasks' ? 'selected' : '' %></option>
+    <option value="calendar tasks"> Calendar task category <%= locals.category === 'calendar tasks' ? 'selected' : '' %></option>
 </select>
+
+
 
 <div id="calendarOptions" style="display:block">
     <label for="week">Select a week:</label>
-    <select id="'week" name="week">
-        <option value="week1"> Week 1</option>
+    <select id="'week" name="week" required>
+        <option value="" disabled selected>Please select an option </option>
+        <% for(week of weeksAvailable) { %>
+        <option value="<%= week.title %>"><%= week.title %> </option>
+        <% } %>
     </select>
     <br>
     <label for="day">Select a day</label>
-    <select id="day" name="day">
+    <select id="day" name="day" required>
+        <option value="" disabled selected >Please select a day </option>
         <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
     </select>
 
 </div>
@@ -47,4 +59,6 @@
 </form>
 
 
+
 <%- include ('../partials/footer')  %>
+

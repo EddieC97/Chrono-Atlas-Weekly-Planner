@@ -6,11 +6,15 @@ const User = require('../models/User')
 
 const Task = require('../models/Task')
 
+const Calendar = require("../models/Calendar")
+
 //* CREATE
 
-router.get('/new', (req,res) => {
+router.get('/new', async (req,res) => {
+
+    const weeksAvailable = await Calendar.find()
     
-    res.render("tasks/new.ejs")
+    res.render("tasks/new.ejs", {weeksAvailable})
 
 
 })
@@ -20,17 +24,29 @@ router.post('/' , async (req, res) => {
         type: req.body.description,
     }
 
+    if (req.body.category === 'calendar tasks'){
+        
+        const newTask = await Task.create({
+            title: req.body.title,
+            description: [descriptionData],
+            category: req.body.category,
+            owner: req.session.user.id, 
+            week:req.body.week,
+            day:req.body.day
     
+        });
 
-    const newTask = await Task.create({
-        title: req.body.title,
-        description: [descriptionData],
-        category: req.body.category,
-        owner: req.session.user.id, 
-        week:req.body.week,
-        day:req.body.day
+    } else {
 
-    });
+        const newTask = await Task.create({
+            title: req.body.title,
+            description: [descriptionData],
+            category: req.body.category,
+            owner: req.session.user.id, 
+        
+        });
+    }
+
 
     res.redirect('/tasks')
 })
