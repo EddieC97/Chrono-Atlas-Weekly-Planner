@@ -22,7 +22,7 @@
 <input type="text" id="DescriptionInput" name="description" value="<%= locals.description %>">
 <br>
 <label for="category" > Please select where you would like to store the task</label>
-<select id="category" name="category">
+<select id="category" name="category" onchange="toggleCalendarForm()">
     <option value="2nd brain" <%= locals.category === '2nd brain' ? 'selected' : '' %>>2nd brain category </option>
     <option value="weekly tasks" <%= locals.category === 'Weekly task category' ? 'selected' : '' %>>Weekly task category </option>
     <option value="calendar tasks" <%= locals.category === 'calendar tasks' ? 'selected' : '' %> > Calendar task category </option>
@@ -30,7 +30,7 @@
 
 
 
-<div id="calendarOptions" style="display:block">
+<div id="calendarOptions" style="display:none">
     <label for="week">Select a week:</label>
     <select id="'week" name="week" required>
         <option value="" disabled selected>Please select an option </option>
@@ -55,6 +55,7 @@
 
 <br>
 <button>Create your tasks!</button>
+
 
 </form>
 

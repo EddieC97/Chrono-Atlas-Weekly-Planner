@@ -226,4 +226,4 @@ module.exports = router;
 //TODO - figure out how to protect read routes: user1a can't see user2a stuff
 //* I think it is already protected so double check that because
 //* I can't see user2a stuff when logged in as user1a
-
+// TODO - remember to add changes from new.ejs to edit.ejs to make sure everything is saving correctly 
