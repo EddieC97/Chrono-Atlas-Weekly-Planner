@@ -1,236 +1,202 @@
-const express = require('express')
+const express = require("express");
 
-const router = express.Router()
+const router = express.Router();
 
-const User = require('../models/User')
+const User = require("../models/User");
 
-const Task = require('../models/Task')
+const Task = require("../models/Task");
 
-const Calendar = require("../models/Calendar")
+const Calendar = require("../models/Calendar");
 
 //* CREATE
 
-router.get('/new', async (req,res) => {
+router.get("/new", async (req, res) => {
+  const weeksAvailable = await Calendar.find();
 
-    const weeksAvailable = await Calendar.find()
-    
-    res.render("tasks/new.ejs", {weeksAvailable})
+  res.render("tasks/new.ejs", { weeksAvailable });
+});
 
+router.post("/", async (req, res) => {
+  console.log("---------------", {
+    category: req.body.category,
+    week: req.body.week,
+    day: req.body.day,
+  });
 
-})
+  const weeksAvailable = await Calendar.find();
 
-router.post('/' , async (req, res) => {
+  let titleCheck = req.body.title;
 
-    const weeksAvailable = await Calendar.find()
-    
-    
+  const descriptionData = {
+    type: req.body.description,
+  };
 
-    let titleCheck = req.body.title
+  
 
-    const descriptionData = {
-        type: req.body.description,
-    }
-    
-    
-    if (titleCheck === '') {
-        res.render("tasks/new.ejs", {
-        
-            errorMessage:"Please enter a title for your task!",
-            description: [descriptionData.type],
-            category: req.body.category,
-            owner: req.session.user.id, 
-            week:req.body.week,
-            day:req.body.day
-            
-        })
-        return
-    }
+  const invalidTitle = req.body.title === "";
+  if (invalidTitle) {
+    res.render("tasks/new.ejs", {
+      weeksAvailable,
+      errorMessage: "Please enter a title for your task!",
+      description: [descriptionData],
+      category: req.body.category,
+      owner: req.session.user.id,
+      week: req.body.week,
+      day: req.body.day,
+    });
+    return;
+  }
 
+  const invalidCategory =
+    req.body.category === "calendar tasks" && (!req.body.week || !req.body.day);
 
-    if (req.body.category === 'calendar tasks'){
-        
-        const newTask = await Task.create({
-            title: req.body.title,
-            description: [descriptionData],
-            category: req.body.category,
-            owner: req.session.user.id, 
-            week:req.body.week,
-            day:req.body.day
-    
-        });
+  if (invalidCategory) {
+    res.render("tasks/new.ejs", {
+      weeksAvailable,
+      errorMessage: `Please select a week and day prior to creating your tas
+            or Alternatively, please select either the 
+            2nd brain category or weekly task category`,
+      title: req.body.title,
+      description: [descriptionData],
+      category: req.body.category,
+      owner: req.session.user.id,
+      week: req.body.week,
+      day: req.body.day,
+    });
+    return;
+  }
 
-        
+  if (req.body.category === "calendar tasks") {
+    const newTask = await Task.create({
+      weeksAvailable,
+      title: req.body.title,
+      description: [descriptionData],
+      category: req.body.category,
+      owner: req.session.user.id,
+      week: req.body.week,
+      day: req.body.day,
+    });
+  } else {
+    const newTask = await Task.create({
+      weeksAvailable,
+      title: req.body.title,
+      description: [descriptionData],
+      category: req.body.category,
+      owner: req.session.user.id,
+    });
+  }
 
-    } else {
+  res.redirect("/tasks");
+});
 
-        const newTask = await Task.create({
-            title: req.body.title,
-            description: [descriptionData],
-            category: req.body.category,
-            owner: req.session.user.id, 
-        
-        });
-    }
+//* READ
+//TODO - fix the rest of the routes
 
+router.get("/", async (req, res) => {
+  // const weeksAvailable = await Calendar.find() //TODO- add calendar function later
 
-    res.redirect('/tasks')
-})
+  // const task = await Task.findById(req.params.id)
+  // if(task.owner.equals(req.session.user.id)) {
+  //     const secondBrain = await Task.find({category: `2nd brain`, owner:req.session.user.id})
+  //     const weeklyTask = await Task.find({category: 'weekly tasks', owner:req.session.user.id})
 
+  //     res.render("tasks/index.ejs", {secondBrain , weeklyTask})
 
+  // } else {
+  //     res.send('No viewing')
 
-//* READ   
-//TODO - fix the rest of the routes 
+  //* cannot read properties of null(reading: 'owner')
 
-router.get('/', async (req, res) => {
+  const secondBrain = await Task.find({
+    category: `2nd brain`,
+    owner: req.session.user.id,
+  });
+  const weeklyTask = await Task.find({
+    category: "weekly tasks",
+    owner: req.session.user.id,
+  });
 
-    const weeksAvailable = await Calendar.find() //TODO- add calendar function later 
+  res.render("tasks/index.ejs", { secondBrain, weeklyTask });
+});
 
-    // const task = await Task.findById(req.params.id)
-    // if(task.owner.equals(req.session.user.id)) {
-    //     const secondBrain = await Task.find({category: `2nd brain`, owner:req.session.user.id})
-    //     const weeklyTask = await Task.find({category: 'weekly tasks', owner:req.session.user.id})
+router.get("/:id", async (req, res) => {
+  const specificWeek = await Calendar.findById(req.params.id);
+  const task = await Task.findById(req.params.id);
 
-    //     res.render("tasks/index.ejs", {secondBrain , weeklyTask})
-
-    // } else {
-    //     res.send('No viewing')
-
-    //* cannot read properties of null(reading: 'owner')
-
-    const secondBrain = await Task.find({category: `2nd brain`, owner:req.session.user.id})
-    const weeklyTask = await Task.find({category: 'weekly tasks', owner:req.session.user.id})
-
-    res.render("tasks/index.ejs", {secondBrain , weeklyTask})
-
-
-
-    
-
-
-        
-    
-
-    
-
-    
-
-    
-})
-
-router.get('/:id', async (req,res) => {
-
-    const specificWeek = await Calendar.findById(req.params.id)
-    const task = await Task.findById(req.params.id)
-
-
-    if(task.owner.equals(req.session.user.id)) {
-        res.render('tasks/show.ejs', {task})
-
-    } else {
-        res.render("tasks/error404.ejs", {
-        errorMessage: `You don't have permission to view that! `
-        })
-        return
-
-    }
-
-
-    
-})
-
-
+  if (task.owner.equals(req.session.user.id)) {
+    res.render("tasks/show.ejs", { task });
+  } else {
+    res.render("tasks/error404.ejs", {
+      errorMessage: `You don't have permission to view that! `,
+    });
+    return;
+  }
+});
 
 //* UPDATE
 
-router.get("/:id/edit", async (req,res) => {
-    const task = await Task.findById(req.params.id)
-    const specificWeek = await Calendar.findById(req.params.id)
-    const weeksAvailable = await Calendar.find()
+router.get("/:id/edit", async (req, res) => {
+  const task = await Task.findById(req.params.id);
+  const specificWeek = await Calendar.findById(req.params.id);
+  const weeksAvailable = await Calendar.find();
 
-    if(task.owner.equals(req.session.user.id)) {
+  if (task.owner.equals(req.session.user.id)) {
+    const task = await Task.findById(req.params.id);
+    res.render("tasks/edit.ejs", { task, specificWeek, weeksAvailable });
+  } else {
+    res.render("tasks/error404.ejs", {
+      errorMessage: `You don't have permission to edit that! `,
+    });
+    return;
+  }
+});
 
-        const task = await Task.findById(req.params.id)
-        res.render('tasks/edit.ejs', {task, specificWeek, weeksAvailable})
-    
-    } else {
-        res.render("tasks/error404.ejs", {
-                errorMessage: `You don't have permission to edit that! `
-        })
-        return
-    }
-    
-})
+router.put("/:id", async (req, res) => {
+  const task = await Task.findById(req.params.id);
 
+  if (task.owner.equals(req.session.user.id)) {
+    const updatedDescription = {
+      type: req.body.description,
+    };
 
+    const updatedTask = await Task.findByIdAndUpdate(
+      req.params.id,
+      {
+        title: req.body.title,
+        description: [updatedDescription],
+        category: req.body.category,
+      },
+      { new: true }
+    );
 
-router.put('/:id', async (req,res) => {
-    const task = await Task.findById(req.params.id)
-
-    if(task.owner.equals(req.session.user.id)){
-
-        const updatedDescription = {
-            type: req.body.description,
-        }
-    
-        const updatedTask = await Task.findByIdAndUpdate(
-            req.params.id,
-            { 
-                title:req.body.title,
-                description:[updatedDescription],
-                category:req.body.category
-    
-            },
-            { new: true }
-        )
-    
-        res.redirect(`/tasks/${req.params.id}`)
-
-    } else {
-        res.render("tasks/error404.ejs", {
-        errorMessage: `You don't have permission to edit that! `
-        })
-        return
-
-    }
-
-
-    
-})
-
-
-
+    res.redirect(`/tasks/${req.params.id}`);
+  } else {
+    res.render("tasks/error404.ejs", {
+      errorMessage: `You don't have permission to edit that! `,
+    });
+    return;
+  }
+});
 
 //* DELETE
 
-router.delete('/:id', async (req,res) => {
+router.delete("/:id", async (req, res) => {
+  const task = await Task.findById(req.params.id);
 
-
-    const task = await Task.findById(req.params.id)
-
-    if(task.owner.equals(req.session.user.id)) {
-
-    const task = await Task.findByIdAndDelete(req.params.id)
-    res.redirect('/tasks')
-
-    } else {
-        res.render("tasks/error404.ejs", {
-            errorMessage: `You don't have permission to delete that! `
-        })
-        return
-    }
-    
-
-})
-
-
-
-
-
+  if (task.owner.equals(req.session.user.id)) {
+    const task = await Task.findByIdAndDelete(req.params.id);
+    res.redirect("/tasks");
+  } else {
+    res.render("tasks/error404.ejs", {
+      errorMessage: `You don't have permission to delete that! `,
+    });
+    return;
+  }
+});
 
 module.exports = router;
-
 
 //TODO - figure out how to protect read routes: user1a can't see user2a stuff
 //* I think it is already protected so double check that because
 //* I can't see user2a stuff when logged in as user1a
-// TODO - remember to add changes from new.ejs to edit.ejs to make sure everything is saving correctly 
+// TODO - remember to add changes from new.ejs to edit.ejs to make sure everything is saving correctly

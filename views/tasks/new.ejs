@@ -19,7 +19,7 @@
 <br>
 
 <label for="Description"> Description:</label>
-<input type="text" id="DescriptionInput" name="description" value="<%= locals.description %>">
+<input type="text" id="DescriptionInput" name="description" value="<%= locals.description.type %>">
 <br>
 <label for="category" > Please select where you would like to store the task</label>
 <select id="category" name="category" onchange="toggleCalendarForm()">
@@ -30,9 +30,9 @@
 
 
 
-<div id="calendarOptions" style="display:none">
+<div id="calendarOptions" style="display:none;">
     <label for="week">Select a week:</label>
-    <select id="week" name="week" required>
+    <select id="week" name="week" >
         <option value="" disabled selected>Please select an option </option>
         <% for(week of weeksAvailable) { %>
         <option value="<%= week.title %>"><%= week.title %> </option>
@@ -40,7 +40,7 @@
     </select>
     <br>
     <label for="day">Select a day</label>
-    <select id="day" name="day" required>
+    <select id="day" name="day">
         <option value="" disabled selected >Please select a day </option>
         <option value="Monday">Monday</option>
         <option value="Tuesday">Tuesday</option>
