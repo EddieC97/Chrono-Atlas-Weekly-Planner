@@ -47,3 +47,16 @@ li {
     margin-bottom:5px;
 }
 
+.secondBrain {
+    border: 1px solid black;
+    padding:5px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.weekly{
+    border: 1px solid black;
+    padding:5px;
+    border-radius: 10px;
+
+}

@@ -61,9 +61,9 @@ router.post('/', async (req,res) => {
 
 router.get('/', async (req,res) => {
     const weekIndex = await Calendar.find()
-    const weeklyTask = await Task.find()
+    // const weeklyTask = await Task.find() // TODO- check how to pass info into the todo-list 
 
-    res.render("calendar/index.ejs", {weekIndex, weeklyTask})
+    res.render("calendar/index.ejs", {weekIndex})
 })
 
 
