@@ -30,6 +30,19 @@
             </ol>
         </div>
     </div>
+    <div class="assigned">
+        <ol>
+            <h3>Assigned Task:</h3>
+            <% for (const task of assignedTask) { %> 
+                <li>
+                    <a href="/tasks/<%= task.id %>">
+                        <h4>Title: <%= task.title %></h4>
+                    </a>
+                </li>
+            <% } %>
+        </ol>
+    </div>
+</div>
     <div class="calendar">
         <%- include ('../calendar/weekly') %>
     </div>

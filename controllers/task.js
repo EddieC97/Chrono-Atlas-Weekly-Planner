@@ -116,7 +116,11 @@ router.get("/", async (req, res) => {
     owner: req.session.user.id,
   });
 
-  res.render("tasks/index.ejs", { secondBrain, weeklyTask });
+  const assignedTask = await Task.find({
+    category:"calendar tasks"
+  })
+
+  res.render("tasks/index.ejs", { secondBrain, weeklyTask, assignedTask });
 });
 
 router.get("/:id", async (req, res) => {
