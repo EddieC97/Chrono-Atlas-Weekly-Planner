@@ -69,7 +69,7 @@ router.get('/', async (req,res) => {
 
 
 router.get("/:id", async (req, res) => {
-    console.log("------here------")
+    
 
     const week = await Calendar.findById(req.params.id)
     
