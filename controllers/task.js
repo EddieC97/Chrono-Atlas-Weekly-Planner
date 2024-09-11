@@ -17,8 +17,6 @@ router.get("/new", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-
-
   const weeksAvailable = await Calendar.find();
 
   let titleCheck = req.body.title;
@@ -26,8 +24,6 @@ router.post("/", async (req, res) => {
   const descriptionData = {
     type: req.body.description,
   };
-
-  
 
   const invalidTitle = req.body.title === "";
   if (invalidTitle) {
@@ -103,95 +99,96 @@ router.get("/", async (req, res) => {
 
   //* cannot read properties of null(reading: 'owner')
 
-const secondBrain = await Task.find({
+  const secondBrain = await Task.find({
     category: `2nd brain`,
     owner: req.session.user.id,
-});
-const weeklyTask = await Task.find({
+  });
+  const weeklyTask = await Task.find({
     category: "weekly tasks",
     owner: req.session.user.id,
-});
+  });
 
-const assignedTask = await Task.find({
-    category:"calendar tasks"
-})
+  const assignedTask = await Task.find({
+    category: "calendar tasks",
+  });
 
-res.render("tasks/index.ejs", { secondBrain, weeklyTask, assignedTask });
+  res.render("tasks/index.ejs", { secondBrain, weeklyTask, assignedTask });
 });
 
 router.get("/:id", async (req, res) => {
-const specificWeek = await Calendar.findById(req.params.id);
-const task = await Task.findById(req.params.id);
+  const specificWeek = await Calendar.findById(req.params.id);
+  const task = await Task.findById(req.params.id);
 
-if (task.owner.equals(req.session.user.id)) {
+  if (task.owner.equals(req.session.user.id)) {
     res.render("tasks/show.ejs", { task });
-} else {
+  } else {
     res.render("tasks/error404.ejs", {
-    errorMessage: `You don't have permission to view that! `,
+      errorMessage: `You don't have permission to view that! `,
     });
     return;
-}
+  }
 });
 
 //* UPDATE
 
 router.get("/:id/edit", async (req, res) => {
-const task = await Task.findById(req.params.id);
-const specificWeek = await Calendar.findById(req.params.id);
-const weeksAvailable = await Calendar.find();
+  const task = await Task.findById(req.params.id);
+  const weeksAvailable = await Calendar.find();
 
-if (task.owner.equals(req.session.user.id)) {
+  if (task.owner.equals(req.session.user.id)) {
     const task = await Task.findById(req.params.id);
-    res.render("tasks/edit.ejs", { task, specificWeek, weeksAvailable });
-} else {
+    res.render("tasks/edit.ejs", { task, weeksAvailable });
+  } else {
     res.render("tasks/error404.ejs", {
-    errorMessage: `You don't have permission to edit that! `,
+      errorMessage: `You don't have permission to edit that! `,
     });
     return;
-}
+  }
 });
 
 router.put("/:id", async (req, res) => {
-const task = await Task.findById(req.params.id);
+  const task = await Task.findById(req.params.id);
+  const weeksAvailable = await Calendar.find();
 
-if (task.owner.equals(req.session.user.id)) {
-    const updatedDescription = {
+  const updatedDescription = {
     type: req.body.description,
-    };
+  };
 
-    const updatedTask = await Task.findByIdAndUpdate(
-    req.params.id,
-    {
-        title: req.body.title,
-        description: [updatedDescription],
-        category: req.body.category,
-    },
-    { new: true }
-    );
+  if (task.owner.equals(req.session.user.id)) {
+    const updatedTask = await Task.findByIdAndUpdate(req.params.id,  {
+      weeksAvailable,
+      title: req.body.title,
+      description: [updatedDescription],
+      category: req.body.category,
+      week: req.body.week,
+      day: req.body.day,
+    }, {
+      new: true,
+    });
 
     res.redirect(`/tasks/${req.params.id}`);
-} else {
+  } else {
     res.render("tasks/error404.ejs", {
-    errorMessage: `You don't have permission to edit that! `,
+      errorMessage: `You don't have permission to edit that! `,
     });
     return;
-}
+  }
 });
 
 //* DELETE
 
 router.delete("/:id", async (req, res) => {
-const task = await Task.findById(req.params.id);
+  const task = await Task.findById(req.params.id);
 
-if (task.owner.equals(req.session.user.id)) {
+  if (task.owner.equals(req.session.user.id)) {
     const task = await Task.findByIdAndDelete(req.params.id);
     res.redirect("/tasks");
-} else {
+  } else {
     res.render("tasks/error404.ejs", {
-    errorMessage: `You don't have permission to delete that! `,
+      errorMessage: `You don't have permission to delete that! `,
     });
     return;
-}
+  }
 });
 
 module.exports = router;
