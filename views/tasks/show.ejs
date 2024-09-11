@@ -1,5 +1,5 @@
 <%- include('../partials/header')  %>
-
+<% console.log(task) %>
 
 <h2> Title: <%= task.title %></h2>
 
@@ -10,6 +10,13 @@
 </h2>
 
 <h2>Category: <%= task.category %></h2>
+
+<% if (task.category === "calendar tasks") { %>
+
+    <h2>Week assigned:<%= task.week %></h2>
+    <h2>Day assigned: <%= task.day %></h2>
+
+<% } %>
 
 
 <a href="/tasks/<%= task.id %>/edit">Edit this task</a>
