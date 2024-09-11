@@ -1,6 +1,7 @@
 <%- include('../partials/header') %>
 
-<h2> Weekly Calendar</h2> 
+
+<h2> <%= week.title%> </h2> 
 
 
 </form>
@@ -16,59 +17,74 @@
         <th>Sunday<div id="sunday-date"><%= formatDates.formatSunday %></div></th>
     </thead>
 
-
 <tbody>
     <tr>
-        <td id="monday">
-            <div class ="task-container">
+        <div class ="task-container">
+            <td id="monday">
                 <ol>
-                    <li>Monday task</li>
-                    <li>Monday task</li>
+                    <% for( task of tasksByDay.Monday) { %>
+                        <li>
+                            <%=  task.title %>      
+                        </li>
+                    <% } %>
+                </ol>
+            </td>
+            <td id="tuesday">
+                <ol>
+                    <% for (task of tasksByDay.Tuesday) { %>
+                        <li>
+                            <%= task.title %>
+                        </li>
+                    <% } %>
+                </ol>
+            </td>
+            <td id="wednesday">
+                <ol>
+                    <% for( task of tasksByDay.Wednesday) { %>
+                        <li>
+                            <%= task.title %>
+                        </li>
+                        <% } %>
+                </ol>
+            </td>
+            <td id="thursday">
+                <ol>
+                    <% for( task of tasksByDay.Thursday) { %>
+                        <li>
+                            <%= task.title %>
+                        </li>
+                        <% } %>
                 </ol>
                 
-            </div>
-        </td>
-        <td id="tuesday">
-            <ol>
-                <li>Tuesday tasks</li>
-                <li>Tuesday tasks</li>
-            </ol>
-            
-        </td>
-        <td id="wednesday">
-            <ol>
-                <li>Wednesday tasks</li>
-                <li>Wednesday tasks</li>
-            </ol>
-            
-        </td>
-        <td id="friday">
-            <ol>
-                <li> Thursday tasks</li>
-                <li> Thursday tasks</li>
-            </ol>
-            
-        </td>
-        <td id="friday">
-            <ol>
-                <li> Friday tasks</li>
-                <li> Friday tasks</li>
-            </ol>
-        </td>
-        <td id="saturday">
-            <ol>
-                <li> Saturday tasks</li>
-                <li> Saturday tasks</li>
-            </ol>
-            
-        </td>
-        <td id="sunday">
-            <ol> 
-                <li> Sunday tasks</li>
-                <li> Sunday tasks</li>
-            </ol>
-            
-        </td>
+            </td>
+            <td id="friday">
+                <ol>
+                    <% for( task of tasksByDay.Friday) { %>
+                        <li>
+                            <%= task.title %>
+                        </li>
+                        <% } %>
+                </ol>
+            </td>
+            <td id="saturday">
+                <ol>
+                    <% for( task of tasksByDay.Saturday) { %>
+                        <li>
+                            <%= task.title %>
+                        </li>
+                        <% } %>
+                </ol>
+            </td>
+            <td id="sunday">
+                <ol>
+                    <% for( task of tasksByDay.Friday) { %>
+                        <li>
+                            <%= task.title %>
+                        </li>
+                        <% } %>
+                </ol>
+            </td>
+        </div>
     </tr>
 
 

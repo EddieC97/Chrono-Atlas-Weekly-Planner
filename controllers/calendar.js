@@ -61,16 +61,36 @@ router.post('/', async (req,res) => {
 
 router.get('/', async (req,res) => {
     const weekIndex = await Calendar.find()
-    // const weeklyTask = await Task.find() // TODO- check how to pass info into the todo-list 
+
 
     res.render("calendar/index.ejs", {weekIndex})
 })
 
 
 
-router.get("/:id", async (req,res) => {
+router.get("/:id", async (req, res) => {
+    console.log("------here------")
 
     const week = await Calendar.findById(req.params.id)
+    
+    const tasks = await Task.find(
+    {
+    category: `calendar tasks`,
+    week: week.title,
+    owner: req.session.user.id,
+
+    })
+
+    const tasksByDay = {
+      Monday: tasks.filter((task) => task.day === "Monday"),
+      Tuesday: tasks.filter((task) => task.day === "Tuesday"),
+      Wednesday: tasks.filter((task) => task.day === "Wednesday"),
+      Thursday: tasks.filter((task) => task.day === "Thursday"),
+      Friday: tasks.filter((task) => task.day === "Friday"),
+      Saturday: tasks.filter((task) => task.day === "Saturday"),
+      Sunday: tasks.filter((task) => task.day === "Sunday"),
+    };
+
 
     const dateFormat = 'dd/MM/yyyy'
     const today = parse(week.date, dateFormat, new Date())
@@ -135,7 +155,7 @@ router.get("/:id", async (req,res) => {
     
 
     if(week.owner.equals(req.session.user.id)) {
-        res.render('calendar/showweekly.ejs', {week,formatDates})
+        res.render('calendar/showweekly.ejs', {week,formatDates, tasksByDay})
     } else {
         res.render("tasks/error404.ejs", {
         errorMessage: `You don't have permission to view that week!`
@@ -145,6 +165,6 @@ router.get("/:id", async (req,res) => {
 
 })
 
-
+//TODO- add validation for to check for req.session.user
 
 module.exports = router;
