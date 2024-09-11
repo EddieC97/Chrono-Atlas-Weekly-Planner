@@ -32,9 +32,9 @@ router.post('/' , async (req, res) => {
     }
     
     
-    if (titleCheck ==='') {
+    if (titleCheck === '') {
         res.render("tasks/new.ejs", {
-            weeksAvailable,
+        
             errorMessage:"Please enter a title for your task!",
             description: [descriptionData.type],
             category: req.body.category,
@@ -59,6 +59,8 @@ router.post('/' , async (req, res) => {
     
         });
 
+        
+
     } else {
 
         const newTask = await Task.create({
@@ -74,11 +76,14 @@ router.post('/' , async (req, res) => {
     res.redirect('/tasks')
 })
 
-//TODO- do validation check for create routes 
 
-//* READ
+
+//* READ   
+//TODO - fix the rest of the routes 
 
 router.get('/', async (req, res) => {
+
+    const weeksAvailable = await Calendar.find() //TODO- add calendar function later 
 
     // const task = await Task.findById(req.params.id)
     // if(task.owner.equals(req.session.user.id)) {
@@ -114,7 +119,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req,res) => {
 
-
+    const specificWeek = await Calendar.findById(req.params.id)
     const task = await Task.findById(req.params.id)
 
 
@@ -139,11 +144,13 @@ router.get('/:id', async (req,res) => {
 
 router.get("/:id/edit", async (req,res) => {
     const task = await Task.findById(req.params.id)
+    const specificWeek = await Calendar.findById(req.params.id)
+    const weeksAvailable = await Calendar.find()
 
     if(task.owner.equals(req.session.user.id)) {
 
         const task = await Task.findById(req.params.id)
-        res.render('tasks/edit.ejs', {task})
+        res.render('tasks/edit.ejs', {task, specificWeek, weeksAvailable})
     
     } else {
         res.render("tasks/error404.ejs", {
