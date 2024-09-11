@@ -23,9 +23,9 @@
 <br>
 <label for="category" > Please select where you would like to store the task</label>
 <select id="category" name="category">
-    <option value="2nd brain">2nd brain category<%= locals.category === '2nd brain' ? 'selected' : '' %></option>
-    <option value="weekly tasks">Weekly task category <%= locals.category === 'Weekly task category' ? 'selected' : '' %></option>
-    <option value="calendar tasks"> Calendar task category <%= locals.category === 'calendar tasks' ? 'selected' : '' %></option>
+    <option value="2nd brain" <%= locals.category === '2nd brain' ? 'selected' : '' %>>2nd brain category </option>
+    <option value="weekly tasks" <%= locals.category === 'Weekly task category' ? 'selected' : '' %>>Weekly task category </option>
+    <option value="calendar tasks" <%= locals.category === 'calendar tasks' ? 'selected' : '' %> > Calendar task category </option>
 </select>
 
 

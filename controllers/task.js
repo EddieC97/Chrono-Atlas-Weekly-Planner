@@ -20,9 +20,32 @@ router.get('/new', async (req,res) => {
 })
 
 router.post('/' , async (req, res) => {
+
+    const weeksAvailable = await Calendar.find()
+    
+    
+
+    let titleCheck = req.body.title
+
     const descriptionData = {
         type: req.body.description,
     }
+    
+    
+    if (titleCheck ==='') {
+        res.render("tasks/new.ejs", {
+            weeksAvailable,
+            errorMessage:"Please enter a title for your task!",
+            description: [descriptionData.type],
+            category: req.body.category,
+            owner: req.session.user.id, 
+            week:req.body.week,
+            day:req.body.day
+            
+        })
+        return
+    }
+
 
     if (req.body.category === 'calendar tasks'){
         
