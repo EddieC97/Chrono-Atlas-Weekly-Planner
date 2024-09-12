@@ -11,15 +11,19 @@ const Calendar = require("../models/Calendar");
 //* CREATE
 
 router.get("/new", async (req, res) => {
-  const weeksAvailable = await Calendar.find();
+  const weeksAvailable = await Calendar.find({
+    owner:req.session.user.id
+  });
 
   res.render("tasks/new.ejs", { weeksAvailable });
 });
 
 router.post("/", async (req, res) => {
-  const weeksAvailable = await Calendar.find();
+  const weeksAvailable = await Calendar.find({
+    owner:req.session.user.id
+  });
 
-  let titleCheck = req.body.title;
+
 
   const descriptionData = {
     type: req.body.description,
@@ -189,4 +193,4 @@ module.exports = router;
 //TODO - figure out how to protect read routes: user1a can't see user2a stuff
 //* I think it is already protected so double check that because
 //* I can't see user2a stuff when logged in as user1a
-// TODO - remember to add changes from new.ejs to edit.ejs to make sure everything is saving correctly
+

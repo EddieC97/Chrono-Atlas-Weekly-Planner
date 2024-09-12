@@ -19,7 +19,7 @@
 <br>
 
 <label for="Description"> Description:</label>
-<input type="text" id="DescriptionInput" name="description" value="<%= locals.description %>">
+<input type="text" id="DescriptionInput" name="description" value="<%= locals.description[0].type %>">
 <br>
 <label for="category" > Please select where you would like to store the task</label>
 <select id="category" name="category" onchange="toggleCalendarForm()">
