@@ -5,15 +5,7 @@ table {
     background: yellow;
 
 }
-.container {
-    display:flex;
-    justify-content: space-between;
-}
 
-.task {
-    flex:2;
-    margin-right: 20px
-}
 .calendar {
     flex:1;
 }
@@ -35,36 +27,30 @@ td {
 tr {
     border: 1px solid green;
 }
-.task-container {
-    position: relative;
-    bottom:0;
-    padding:5px;
+
+
+
+
+.container {
+    display:flex;
+    flex-direction: row;
+    overflow: auto;
+    
 }
 
-
-
-li {
-    margin-bottom:5px;
+.task {
+    display: flex;
+    
 }
 
-.secondBrain {
+.secondBrain,
+.weekly,
+.assigned {
+    flex:1;
     border: 1px solid black;
-    padding:5px;
+    padding: 5px;
     border-radius: 10px;
     margin-bottom: 20px;
+    overflow:auto;
 }
 
-.weekly{
-    border: 1px solid black;
-    padding:5px;
-    border-radius: 10px;
-    margin-bottom:20px;
-}
-
-.assigned{
-    border: 1px solid black;
-    padding:5px;
-    border-radius: 10px;
-    margin-bottom:20px;
-
-}
