@@ -85,17 +85,9 @@ router.post("/", async (req, res) => {
 //TODO - fix the rest of the routes
 
 router.get("/", async (req, res) => {
-  // const weeksAvailable = await Calendar.find() //TODO- add calendar function later
+  const task = await Task.find()
+  //! if i tried to do task.owner then it doesn't work
 
-  // const task = await Task.findById(req.params.id)
-  // if(task.owner.equals(req.session.user.id)) {
-  //     const secondBrain = await Task.find({category: `2nd brain`, owner:req.session.user.id})
-  //     const weeklyTask = await Task.find({category: 'weekly tasks', owner:req.session.user.id})
-
-  //     res.render("tasks/index.ejs", {secondBrain , weeklyTask})
-
-  // } else {
-  //     res.send('No viewing')
 
   //* cannot read properties of null(reading: 'owner')
 
@@ -110,6 +102,7 @@ router.get("/", async (req, res) => {
 
   const assignedTask = await Task.find({
     category: "calendar tasks",
+    owner:req.session.user.id
   });
 
   res.render("tasks/index.ejs", { secondBrain, weeklyTask, assignedTask });

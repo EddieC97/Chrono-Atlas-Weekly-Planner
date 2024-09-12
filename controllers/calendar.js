@@ -60,7 +60,9 @@ router.post('/', async (req,res) => {
 //* READ
 
 router.get('/', async (req,res) => { //TODO- add validation to this 
-    const weekIndex = await Calendar.find()
+    const weekIndex = await Calendar.find({
+        owner:req.session.user.id
+    })
 
 
     res.render("calendar/index.ejs", {weekIndex})
@@ -204,7 +206,13 @@ router.get('/:id/edit', async (req,res) => {
 
 
     }else {
-        //TODO- render the error message 
+
+        res.render("tasks/error404.ejs", {
+            errorMessage: `You don't have permission to update that week!`
+            })
+            return
+
+        
     }
 
 
@@ -245,15 +253,24 @@ router.put('/:id', async (req,res) => {
             res.redirect(`/calendars/${req.params.id}`)
     
         } else {
-            //TODO- render error message 
-            return
+            res.render("tasks/error404.ejs", {
+                errorMessage: `You don't have permission to update that week!`
+                })
+                return
         }
 
     } else {
-        res.render('/calendar/edit.ejs', 
-        {
-            //TODO: add error message 
+
+        res.render('calendar/edit.ejs', {
+            week,
+            errorMessage:`Please enter a valid date with the format of dd/MM/YYYY! 
+            For example: 01/01/2024`,
+            title:req.body.title
+        
         })
+        return;
+
+        
     }
 
 
