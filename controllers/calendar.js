@@ -59,7 +59,7 @@ router.post('/', async (req,res) => {
 
 //* READ
 
-router.get('/', async (req,res) => {
+router.get('/', async (req,res) => { //TODO- add validation to this 
     const weekIndex = await Calendar.find()
 
 
@@ -82,13 +82,13 @@ router.get("/:id", async (req, res) => {
     })
 
     const tasksByDay = {
-      Monday: tasks.filter((task) => task.day === "Monday"),
-      Tuesday: tasks.filter((task) => task.day === "Tuesday"),
-      Wednesday: tasks.filter((task) => task.day === "Wednesday"),
-      Thursday: tasks.filter((task) => task.day === "Thursday"),
-      Friday: tasks.filter((task) => task.day === "Friday"),
-      Saturday: tasks.filter((task) => task.day === "Saturday"),
-      Sunday: tasks.filter((task) => task.day === "Sunday"),
+    Monday: tasks.filter((task) => task.day === "Monday"),
+    Tuesday: tasks.filter((task) => task.day === "Tuesday"),
+    Wednesday: tasks.filter((task) => task.day === "Wednesday"),
+    Thursday: tasks.filter((task) => task.day === "Thursday"),
+    Friday: tasks.filter((task) => task.day === "Friday"),
+    Saturday: tasks.filter((task) => task.day === "Saturday"),
+    Sunday: tasks.filter((task) => task.day === "Sunday"),
     };
 
 
@@ -155,7 +155,7 @@ router.get("/:id", async (req, res) => {
     
 
     if(week.owner.equals(req.session.user.id)) {
-        res.render('calendar/showweekly.ejs', {week,formatDates, tasksByDay})
+        res.render('calendar/showWeekly.ejs', {week,formatDates, tasksByDay})
     } else {
         res.render("tasks/error404.ejs", {
         errorMessage: `You don't have permission to view that week!`
@@ -165,6 +165,37 @@ router.get("/:id", async (req, res) => {
 
 })
 
+router.get('/day/:day/:id', async (req,res) => {
+
+    const day = req.params.day
+    const calendarWeekId = req.params.id
+
+    
+    
+    const week = await Calendar.findById(calendarWeekId)
+
+    const tasks = await Task.find(
+    {
+        category: 'calendar tasks',
+        week: week.title,
+        day: day,
+        owner: req.session.user.id,
+
+    })
+
+    
+    
+
+    res.render('calendar/showDaily.ejs', {tasks,week})
+
+
+
+
+
+})
+
 //TODO- add validation for to check for req.session.user
+//TODO- add another route where I can click on the Monday and it 
+//TODO - will send me to a page with just that day's task 
 
 module.exports = router;

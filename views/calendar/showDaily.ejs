@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+
+
+
+<% if (tasks.length > 0) { %>
+
+    <h1> Tasks for week:<%= week.title %> ( <%= tasks[0].day %>)</h1>
+
+    <ol>
+        <% for (task of tasks) { %>
+            <li>
+                <a href="/tasks/<%= task.id %>">
+                    <h3>Title: <%= task.title %></h3>
+                </a>
+                <h3>Description: <%=task.description[0].type %></h3>
+            </li>
+        <% } %>
+    </ol>
+
+<% } else { %>
+    <p>No tasks allocated for today. Click on create a new task on top to start 
+        allocating task to this week</p>
+<% } %>
+
+
+
+
+
+
+
+
+
+<%- include ('../partials/footer')  %>

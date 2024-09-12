@@ -8,13 +8,27 @@
 
 <table>
     <thead>
-        <th>Monday<div id="monday-date"> <%= formatDates.formatMonday %></div></th>
-        <th>Tuesday <div id="tuesday-date"><%= formatDates.formatTuesday %></div></th>
-        <th>Wednesday<div id="wednesday-date"><%= formatDates.formatWednesday %></div></th>
-        <th>Thursday<div id="thursday-date"><%= formatDates.formatThursday %></div></th>
-        <th>Friday<div id="friday-date"><%= formatDates.formatFriday %></div></th>
-        <th>Saturday<div id="saturday-date"><%= formatDates.formatSaturday %></div></th>
-        <th>Sunday<div id="sunday-date"><%= formatDates.formatSunday %></div></th>
+        <th>
+            <a href='/calendars/day/Monday/<%= week.id %>'> Monday</a>
+            <div id="monday-date"> <%= formatDates.formatMonday %></div></th>
+        <th>
+            <a href='/calendars/day/Tuesday/<%= week.id %>'> Tuesday</a>
+            <div id="tuesday-date"><%= formatDates.formatTuesday %></div></th>
+        <th>
+            <a href='/calendars/day/Wednesday/<%= week.id %>'> Wednesday</a>
+            <div id="wednesday-date"><%= formatDates.formatWednesday %></div></th>
+        <th>
+            <a href='/calendars/day/Thursday/<%= week.id %>'> Thursday</a>
+            <div id="thursday-date"><%= formatDates.formatThursday %></div></th>
+        <th>
+            <a href='/calendars/day/Friday/<%= week.id %>'> Friday</a>
+            <div id="friday-date"><%= formatDates.formatFriday %></div></th>
+        <th>
+            <a href='/calendars/day/Saturday/<%= week.id %>'> Saturday</a>
+            <div id="saturday-date"><%= formatDates.formatSaturday %></div></th>
+        <th>
+            <a href='/calendars/day/Sunday/<%= week.id %>'> Sunday</a>
+            <div id="sunday-date"><%= formatDates.formatSunday %></div></th>
     </thead>
 
 <tbody>
