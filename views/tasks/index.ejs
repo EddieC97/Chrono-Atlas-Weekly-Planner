@@ -1,5 +1,5 @@
 <%- include('../partials/header') %>
-
+<% console.log(assignedTask) %>
 <h2>All Tasks</h2>
 
 <div class="container">
@@ -38,14 +38,13 @@
                     <a href="/tasks/<%= task.id %>">
                         <h4>Title: <%= task.title %></h4>
                     </a>
+                    <h4>Assigned Week: <%= task.week %></h4>
+                    <h4>Assigned Day: <%= task.day %> </h4>
                 </li>
             <% } %>
         </ol>
     </div>
 </div>
-    <div class="calendar">
-        <%- include ('../calendar/weekly') %>
-    </div>
 </div>
 
 <%- include ('../partials/footer') %>
