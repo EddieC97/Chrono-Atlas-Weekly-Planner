@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chrono Atlas </title>
-    <link rel="stylesheet" href="/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chrono Atlas</title>
+    <link rel="stylesheet" href="/css/style.css" />
     <script src="/utils/toggleCalendarForm.js"></script>
-    
-</head>
-<body>
-    
+  </head>
+  <body>
     <header>
-        <nav>
-            <h1>Start Planning your week</h1>
-            <a href="/">Home |</a> 
-            
-            <%  if (user !== null) { %>
-                <a href="/tasks/new">Create a new task |</a>
-                <a href="/tasks">All tasks |</a> 
-                <a href="/calendars">All weekly calendars|</a>
-                <a href="/calendars/new"> Create a new week|</a>
-            <%  } %>
-            <br>
+      <nav>
+        <h1>Start Planning your week</h1>
+        <a href="/">Home |</a>
 
-            <%  if (user !== null) { %>
-                <a href="/auth/logout">Logout |</a>                
-            <%  } else { %>
-            <a href="/auth/signup">Sign up |</a>
-            <a href="/auth/login">Login |</a>
-            <% } %>
+        <% if (user !== null) { %>
+        <a href="/tasks/new">Create a new task |</a>
+        <a href="/tasks">All tasks |</a>
+        <a href="/calendars">All weekly calendars|</a>
+        <a href="/calendars/new"> Create a new week|</a>
+        <% } %>
+        <br />
 
-<br>
-            
+        <% if (user !== null) { %>
+        <a href="/auth/logout">Logout |</a>
+        <% } else { %>
+        <a href="/auth/signup">Sign up |</a>
+        <a href="/auth/login">Login |</a>
+        <% } %>
 
-
-        
-        </nav>
-        
+        <br />
+      </nav>
     </header>
 
-    <main>
+    <main></main>
+  </body>
+</html>
