@@ -1,3 +1,10 @@
+body{
+    font-family: 'Times New Roman', Times, serif;
+    background-color: lightgray;
+    color: black
+}
+
+
 table {
     width:100%;
     border: 1px black;
