@@ -303,7 +303,7 @@ router.delete('/:id', async (req,res) => {
 
 
 
-    }else {
+    } else {
 
         res.render("tasks/error404.ejs", {
             errorMessage: `You don't have permission to delete that week!`

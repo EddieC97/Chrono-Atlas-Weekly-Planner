@@ -130,7 +130,9 @@ router.get("/:id", async (req, res) => {
 
 router.get("/:id/edit", async (req, res) => {
   const task = await Task.findById(req.params.id);
-  const weeksAvailable = await Calendar.find();
+  const weeksAvailable = await Calendar.find({
+    owner:req.session.user.id
+  });
 
   if (task.owner.equals(req.session.user.id)) {
     
@@ -145,7 +147,9 @@ router.get("/:id/edit", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const task = await Task.findById(req.params.id);
-  const weeksAvailable = await Calendar.find();
+  const weeksAvailable = await Calendar.find({
+    owner:req.session.user.id
+  });
 
   const updatedDescription = {
     type: req.body.description,

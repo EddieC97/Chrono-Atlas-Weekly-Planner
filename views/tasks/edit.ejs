@@ -1,7 +1,7 @@
 <%- include('../partials/header')  %>
 
 
-
+<% console.log(weeksAvailable) %>
 
 
 
@@ -34,8 +34,10 @@
 <label for="category" > Please select where you would like to store the task</label>
 <select id="category" name="category" onchange="toggleCalendarForm()">
     <option value="2nd brain" <%= task.category === '2nd brain' ? 'selected' : '' %>>2nd brain category </option>
-    <option value="weekly tasks" <%= task.category === 'Weekly task category' ? 'selected' : '' %>>Weekly task category </option>
+    <option value="weekly tasks" <%= task.category === 'weekly tasks' ? 'selected' : '' %>>Weekly task category </option>
+    <% if(weeksAvailable.length > 0) { %>
     <option value="calendar tasks" <%= task.category === 'calendar tasks' ? 'selected' : '' %> > Calendar task category </option>
+    <% } %>
 </select>
 
     <div id="calendarOptions" style="display: <%= task.category === 'calendar tasks' ? 'block' : 'none'  %>">
