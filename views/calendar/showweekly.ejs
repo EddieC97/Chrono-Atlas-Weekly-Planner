@@ -103,4 +103,10 @@
 </tbody>
 </table>
 
+<a href="/calendars/<%= week.id %>/edit">Edit this week</a>
+<br>
+<form action="/calendars/<%= week.id %>?_method=delete" method="post">
+    <button>Delete this week</button>
+</form>
+
 <%- include ('../partials/footer')  %>

@@ -75,20 +75,20 @@ router.get("/:id", async (req, res) => {
     
     const tasks = await Task.find(
     {
-    category: `calendar tasks`,
-    week: week.title,
-    owner: req.session.user.id,
+        category: `calendar tasks`,
+        week: week.title,
+        owner: req.session.user.id,
 
     })
 
     const tasksByDay = {
-    Monday: tasks.filter((task) => task.day === "Monday"),
-    Tuesday: tasks.filter((task) => task.day === "Tuesday"),
-    Wednesday: tasks.filter((task) => task.day === "Wednesday"),
-    Thursday: tasks.filter((task) => task.day === "Thursday"),
-    Friday: tasks.filter((task) => task.day === "Friday"),
-    Saturday: tasks.filter((task) => task.day === "Saturday"),
-    Sunday: tasks.filter((task) => task.day === "Sunday"),
+        Monday: tasks.filter((task) => task.day === "Monday"),
+        Tuesday: tasks.filter((task) => task.day === "Tuesday"),
+        Wednesday: tasks.filter((task) => task.day === "Wednesday"),
+        Thursday: tasks.filter((task) => task.day === "Thursday"),
+        Friday: tasks.filter((task) => task.day === "Friday"),
+        Saturday: tasks.filter((task) => task.day === "Saturday"),
+        Sunday: tasks.filter((task) => task.day === "Sunday"),
     };
 
 
@@ -188,14 +188,111 @@ router.get('/day/:day/:id', async (req,res) => {
 
     res.render('calendar/showDaily.ejs', {tasks,week})
 
+})
 
+
+//* UPDATE
+
+router.get('/:id/edit', async (req,res) => {
+
+    const week = await Calendar.findById(req.params.id)
+
+    if(week.owner.equals(req.session.user.id)) {
+
+        
+        res.render('calendar/edit.ejs', {week})
+
+
+    }else {
+        //TODO- render the error message 
+    }
 
 
 
 })
 
+router.put('/:id', async (req,res) => {
+
+    const week = await Calendar.findById(req.params.id)
+    
+    const filteredTasks = await Task.find({week:week.title})
+    
+    const dateCheck = parse(req.body.date, 'dd/MM/yyyy', new Date())
+
+    if(isValid(dateCheck)) {
+
+        if(week.owner.equals(req.session.user.id)){
+            const updatedWeek = await Calendar.findByIdAndUpdate(req.params.id, 
+            {
+                title:req.body.title,
+                date:req.body.date
+    
+            }, 
+            {
+                new:true
+            });
+
+            for (task of filteredTasks) {
+                const updatedFilteredTask = await Task.findByIdAndUpdate(task._id,
+                {
+                    week: req.body.title
+                },
+                {
+                    new:true
+                });
+                
+            }
+            res.redirect(`/calendars/${req.params.id}`)
+    
+        } else {
+            //TODO- render error message 
+            return
+        }
+
+    } else {
+        res.render('/calendar/edit.ejs', 
+        {
+            //TODO: add error message 
+        })
+    }
+
+
+})
+
+//* DELETE 
+
+router.delete('/:id', async (req,res) => {
+    const week = await Calendar.findById(req.params.id)
+
+    const filteredTasks = await Task.find({week:week.title})
+
+
+    if (week.owner.equals(req.session.user.id)) {
+        const week = await Calendar.findByIdAndDelete(req.params.id)
+        res.redirect("/calendars")
+
+        for (task of filteredTasks) {
+            const updatedFilteredTask = await Task.findByIdAndUpdate(task._id,
+            {
+                category: "2nd brain",
+                $unset: {week:1, day:1}
+            
+            },
+            {
+                new:true
+            });
+            
+        }
+
+
+
+    }else {
+        //TODO - add error validation
+
+    }
+})
+
 //TODO- add validation for to check for req.session.user
-//TODO- add another route where I can click on the Monday and it 
-//TODO - will send me to a page with just that day's task 
+
 
 module.exports = router;

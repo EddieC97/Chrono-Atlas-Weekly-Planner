@@ -136,7 +136,7 @@ router.get("/:id/edit", async (req, res) => {
   const weeksAvailable = await Calendar.find();
 
   if (task.owner.equals(req.session.user.id)) {
-    const task = await Task.findById(req.params.id);
+    
     res.render("tasks/edit.ejs", { task, weeksAvailable });
   } else {
     res.render("tasks/error404.ejs", {
