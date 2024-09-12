@@ -74,6 +74,6 @@ function isLoggedIn (req,res,next) {
 
 }   
 
-//TODO - deploy to render.com 
+
 //TODO - remember to do the README
 
