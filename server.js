@@ -11,7 +11,7 @@ app.use(express.json())
 const methodOverride = require("method-override")
 app.use(methodOverride ("_method", {methods: ['POST', 'GET']}))
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     console.log('server listening on http://localhost:3000')
 })
 
@@ -62,7 +62,7 @@ app.use('/tasks', isLoggedIn, taskController)
 const calendarController = require('./controllers/calendar.js')
 app.use('/calendars', isLoggedIn, calendarController)
 
-//TODO - make sure it can display in the index.ejs file properly 
+
 
 function isLoggedIn (req,res,next) {
 
@@ -76,6 +76,4 @@ function isLoggedIn (req,res,next) {
 
 //TODO - deploy to render.com 
 //TODO - remember to do the README
-//TODO - add youtube video to error 404 
-//TODO - check if isLoggedIn fn else statement is showing the right message
-//* I think it is but need to double check 
+
