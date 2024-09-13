@@ -93,6 +93,8 @@ tr {
     background-color: green;
     color:white;
     border-color: black;
+    font-size: 1.5rem;
+    padding:1.0rem;
 }
 
 
@@ -168,4 +170,24 @@ footer {
     color:black 
 
 }
+form {
+    font-size: 1.5rem;
+}
 
+label {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+
+input {
+    font-size:1.0rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+select{
+    font-size:1.0rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
