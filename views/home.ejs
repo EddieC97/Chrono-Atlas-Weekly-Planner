@@ -1,21 +1,18 @@
-<%- include('partials/header') %> <% if (user) { %>
-<h2>
-  Welcome, <%= user.username %>!
-  <h2>
-    <% } else { %>
+<%- include('partials/header') %> 
 
-    <h2>Welcome to Chrono Atlas: your favorite weekly planner!</h2>
-
-    <% } %>
-
-    <p>Ready to organize your week?</p>
-
-    <p>
-      You can jump straight into creating tasks or set up a week first for
-      better planning. Start now to get everything in order and make your week
-      more productive!
+<% if (user) { %>
+    <p class="welcome">Welcome, <%= user.username %>!
     </p>
+<% } else { %>
+    <p class="welcome">Welcome to Chrono Atlas: your favorite weekly planner!</p>
+<% } %>
 
-    <%- include ('partials/footer') %>
-  </h2>
-</h2>
+<p class="welcome">Ready to organize your week?</p>
+
+<p class="welcome">
+  You can jump straight into creating tasks or set up a week first for
+  better planning. Start now to get everything in order and make your week
+  more productive!
+</p>
+
+<%- include('partials/footer') %>
