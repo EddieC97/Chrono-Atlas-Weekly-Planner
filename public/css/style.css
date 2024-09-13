@@ -121,3 +121,13 @@ nav a {
     margin: 0 0.5rem;
 }
 
+footer {
+    background-color: lightgrey;
+    border-top: 1px solid black;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1 rem;
+    color:black 
+
+}
+
