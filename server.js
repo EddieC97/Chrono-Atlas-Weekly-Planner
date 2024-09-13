@@ -1,30 +1,6 @@
 const express = require("express")
 const app = express()
 
-function isLoggedIn (req,res,next) {
-
-    if(req.session.user){
-        next()
-    }else {
-        res.redirect(`/auth/login?message=1`)
-    }
-
-}  
-
-const authController = require('./controllers/auth.js')
-app.use('/auth', authController)
-
-
-const taskController = require("./controllers/task.js")
-app.use('/tasks', isLoggedIn, taskController)
-
-const calendarController = require('./controllers/calendar.js')
-app.use('/calendars', isLoggedIn, calendarController)
-
-
-
- 
-
 app.set("View engine", "ejs")
 
 app.use(express.static("public"))
