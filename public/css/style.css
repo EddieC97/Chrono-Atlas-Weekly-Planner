@@ -80,12 +80,16 @@ tr {
     background-color: red;
     color:white;
     border-color: black;
+    font-size: 1.0rem;
+    padding:1.0rem;
 }
 
 .editButton {
     background-color:teal;
     color:white;
     border-color: black;
+    font-size: 1.0rem;
+    padding: 1.0rem;
 
 }
 
@@ -93,7 +97,7 @@ tr {
     background-color: green;
     color:white;
     border-color: black;
-    font-size: 1.5rem;
+    font-size: 1.0rem;
     padding:1.0rem;
 }
 
@@ -200,5 +204,11 @@ select{
     font-size: 1.5rem;
     Color: red;
     
-    
+}
+
+a {
+    font-size: 1.5rem;
+    color:blue;
+    padding: blue;
+    margin-bottom: 1rem;
 }
