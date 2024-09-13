@@ -123,6 +123,7 @@
 <br>
 <form action="/calendars/<%= week.id %>?_method=delete" method="post">
     <button class="deleteButton">Delete this week</button>
+    <p>**Please note that any tasks assigned to this week will be moved to the 2nd Brain category. To completely remove everything, including the week itself, make sure to delete the individual tasks first!</p>
 </form>
 
 <%- include ('../partials/footer')  %>
