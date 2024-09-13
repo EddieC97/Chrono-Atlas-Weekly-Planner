@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 const mongoose = require("mongoose")
 const User = require('./models/User.js')
 
-require('dotenv').config()
+
 
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('open', () => {
@@ -77,5 +77,4 @@ function isLoggedIn (req,res,next) {
 }   
 
 
-//TODO - remember to do the README
 
