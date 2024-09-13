@@ -104,14 +104,24 @@ header {
 
 nav {
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    gap: 1 rem;
+    gap: 0.5 rem;
     
 }
+.navLinks {
+    padding:0;
+    margin:0;
+    display:flex;
+    flex-wrap:wrap;
+    gap:1rem;
+    list-style: none;
+    justify-content: center;
 
-h1{
-    font-size:2 rem;
+}
+
+h1 {
+    font-size:2.0rem;
     color:black;
     margin-bottom: 0.5rem;
     

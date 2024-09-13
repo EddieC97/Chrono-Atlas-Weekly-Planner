@@ -11,11 +11,13 @@ app.use(express.json())
 const methodOverride = require("method-override")
 app.use(methodOverride ("_method", {methods: ['POST', 'GET']}))
 
+require("dotenv").config()
+
 app.listen(process.env.PORT, () => {
     console.log('server listening on http://localhost:3000')
 })
 
-require("dotenv").config()
+
 
 const session = require('express-session')
 
