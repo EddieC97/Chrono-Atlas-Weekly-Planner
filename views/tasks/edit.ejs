@@ -26,11 +26,11 @@
 
 <label for="Title"> Title:</label>
 <input type="text" id="titleInput" name="title" value="<%= task.title  %>">
-<br>
+
 
 <label for="Description"> Description:</label>
 <input type="text" id="DescriptionInput" name="description" value="<%= task.description[0].type %>">
-<br>
+
 <label for="category" > Please select where you would like to store the task</label>
 <select id="category" name="category" onchange="toggleCalendarForm()">
     <option value="2nd brain" <%= task.category === '2nd brain' ? 'selected' : '' %>>2nd brain category </option>
@@ -49,7 +49,7 @@
                 <option value="<%= week.title %>" <%= week.title === task.week ? 'selected' : '' %>><%= week.title %> </option>
             <% } %>
         </select>
-        <br>
+        
         <label for="day">Select a day</label>
         <select id="day" name="day">
             <option value="" disabled  >Please select a day </option>

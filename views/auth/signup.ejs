@@ -1,30 +1,32 @@
-<%- include('../partials/header')  %>
+<%- include('../partials/header') %>
 
-<h2> Create an account</h2>
+<h2>Create an account</h2>
 
 <form action="/auth/signup" method="post">
+  <% if(locals.errorMessage) { %>
+  <div class="Error"><%= errorMessage %></div>
+  <% } %>
 
+  <label for="username"> Username:</label>
+  <input
+    type="text"
+    id="usernameInput"
+    name="username"
+    value="<%= locals.username  %>"
+  />
+  
 
-<% if(locals.errorMessage) { %>
-    <div class="Error">
-        <%= errorMessage  %>
-    </div>
-<% } %>
+  <label for="passwordInput"> Password:</label>
+  <input type="password" id="passwordInput" name="password" />
 
+  <label for="passwordConfirmationInput"> Password confirmation</label>
+  <input
+    type="password"
+    id="passwordConfirmationInput"
+    name="passwordConfirmation"
+  />
 
-<label for="username"> Username:</label>
-<input type="text" id="usernameInput" name="username" value="<%= locals.username  %>">
-<br>
-
-<label for="passwordInput"> Password:</label>
-<input type="password" id="passwordInput" name="password">
-<br>
-<label for="passwordConfirmationInput"> Password confirmation</label>
-<input type="password" id="passwordConfirmationInput" name="passwordConfirmation">
-<br>
-<button class="createButton">Create your user!</button>
-
+  <button class="createButton">Create your user!</button>
 </form>
 
-
-<%- include ('../partials/footer')  %>
+<%- include ('../partials/footer') %>

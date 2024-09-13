@@ -1,35 +1,29 @@
-<%- include('../partials/header')  %>
+<%- include('../partials/header') %>
 
-<h2> Create a new week</h2>
+<h2>Create a new week</h2>
 
 <form action="/calendars" method="post">
+  <% if(locals.errorMessage) { %>
+  <div class="Error"><%= locals.errorMessage %></div>
+  <% } %>
+
+  <label for="Title"> Title:</label>
+  <input
+    type="text"
+    id="titleInput"
+    name="title"
+    value="<%= locals.title  %>"
+  />
+  
+
+  <label for="date">
+    To help us set up your weekly calendar, please provide the date of the first
+    Monday of the week. Use the format dd/MM/yyyy (e.g. 01/01/2024). Thank you!
+  </label>
+  <input type="text" id="DatenInput" name="date" value="<%= locals.date %>" />
 
 
-<% if(locals.errorMessage) { %>
-    <div class="Error">
-        <%= locals.errorMessage  %>
-    </div>
-<% } %>
-
-
-<label for="Title"> Title:</label>
-<input type="text" id="titleInput" name="title" value="<%= locals.title  %>">
-<br>
-
-<label for="date"> To help us set up your weekly calendar, 
-    please provide the date of the first Monday of the week. 
-    Use the format dd/MM/yyyy (e.g. 01/01/2024).
-    Thank you!
-</label>
-<input type="text" id="DatenInput" name="date" value="<%= locals.date %>">
-
-
-
-
-<br>
-<button class="createButton">Create your Week!</button>
-
+  <button class="createButton">Create your Week!</button>
 </form>
 
-
-<%- include ('../partials/footer')  %>
+<%- include ('../partials/footer') %>

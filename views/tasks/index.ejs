@@ -3,46 +3,46 @@
 <h2>All Tasks</h2>
 
 <div class="container">
-    <div class="secondBrain">
-        <h3>2nd Brain Tasks:</h3>
-        <ol>
-            <% for (const task of secondBrain) { %>
-                <li>
-                    <a href="/tasks/<%= task.id %>">
-                        <h4>Title: <%= task.title %></h4>
-                    </a>
-                </li>
-            <% } %>
-        </ol>
-    </div>
+  <div class="secondBrain">
+    <h3>2nd Brain Tasks:</h3>
+    <ol>
+      <% for (const task of secondBrain) { %>
+      <li>
+        <a href="/tasks/<%= task.id %>">
+          <h4>Title: <%= task.title %></h4>
+        </a>
+      </li>
+      <% } %>
+    </ol>
+  </div>
 
-    <div class="weekly">
-        <h3>Weekly Tasks:</h3>
-        <ol>
-            <% for (const task of weeklyTask) { %> 
-                <li>
-                    <a href="/tasks/<%= task.id %>">
-                        <h4>Title: <%= task.title %></h4>
-                    </a>
-                </li>
-            <% } %>
-        </ol>
-    </div>
+  <div class="weekly">
+    <h3>Weekly Tasks:</h3>
+    <ol>
+      <% for (const task of weeklyTask) { %>
+      <li>
+        <a href="/tasks/<%= task.id %>">
+          <h4>Title: <%= task.title %></h4>
+        </a>
+      </li>
+      <% } %>
+    </ol>
+  </div>
 
-    <div class="assigned">
-        <h3>Assigned Task:</h3>
-        <ol>
-            <% for (const task of assignedTask) { %> 
-                <li>
-                    <a href="/tasks/<%= task.id %>">
-                        <h4>Title: <%= task.title %></h4>
-                    </a>
-                    <h4>Assigned Week: <%= task.week %></h4>
-                    <h4>Assigned Day: <%= task.day %></h4>
-                </li>
-            <% } %>
-        </ol>
-    </div>
+  <div class="assigned">
+    <h3>Assigned Task:</h3>
+    <ol>
+      <% for (const task of assignedTask) { %>
+      <li>
+        <a href="/tasks/<%= task.id %>">
+          <h4>Title: <%= task.title %></h4>
+        </a>
+        <h4>Assigned Week: <%= task.week %></h4>
+        <h4>Assigned Day: <%= task.day %></h4>
+      </li>
+      <% } %>
+    </ol>
+  </div>
 </div>
 
 <%- include('../partials/footer') %>

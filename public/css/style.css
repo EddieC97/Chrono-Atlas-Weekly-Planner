@@ -225,3 +225,17 @@ a {
 .noStyle{
     text-decoration:none;
 }
+
+.formContainer {
+    display:flex;
+    flex-direction: column;
+    
+}
+
+.formContainer label,
+.formContainer input,
+.formContainer select,
+.formContainer button {
+    display:block;
+    margin-bottom: 10px;
+}
