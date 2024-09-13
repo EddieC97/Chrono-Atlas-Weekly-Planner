@@ -146,13 +146,13 @@ router.get("/:id", async (req, res) => {
     let formatSunday = format(sunday, "dd-MM-yyyy");
 
     const formatDates = {
-    formatMonday,
-    formatTuesday,
-    formatWednesday,
-    formatThursday,
-    formatFriday,
-    formatSaturday,
-    formatSunday,
+        formatMonday,
+        formatTuesday,
+        formatWednesday,
+        formatThursday,
+        formatFriday,
+        formatSaturday,
+        formatSunday,
     };
     
 
@@ -160,7 +160,7 @@ router.get("/:id", async (req, res) => {
         res.render('calendar/showWeekly.ejs', {week,formatDates, tasksByDay})
     } else {
         res.render("tasks/error404.ejs", {
-        errorMessage: `You don't have permission to view that week!`
+            errorMessage: `You don't have permission to view that week!`
         })
         return
     }
@@ -209,8 +209,8 @@ router.get('/:id/edit', async (req,res) => {
 
         res.render("tasks/error404.ejs", {
             errorMessage: `You don't have permission to update that week!`
-            })
-            return
+        })
+        return
 
         
     }

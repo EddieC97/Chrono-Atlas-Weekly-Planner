@@ -1,5 +1,13 @@
 const express = require("express")
 const app = express()
+const methodOverride = require("method-override")
+const session = require('express-session')
+const MongoStore = require('connect-mongo')
+const mongoose = require("mongoose")
+const User = require('./models/User.js')
+const authController = require('./controllers/auth.js')
+const taskController = require("./controllers/task.js")
+const calendarController = require('./controllers/calendar.js')
 
 app.set("View engine", "ejs")
 
@@ -8,7 +16,7 @@ app.use(express.static("public"))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-const methodOverride = require("method-override")
+
 app.use(methodOverride ("_method", {methods: ['POST', 'GET']}))
 
 require("dotenv").config()
@@ -19,9 +27,7 @@ app.listen(process.env.PORT, () => {
 
 
 
-const session = require('express-session')
 
-const MongoStore = require('connect-mongo')
 
 app.use(session ({
     secret:process.env.SESSION_SECRET, 
@@ -36,8 +42,7 @@ app.use((req, res, next) => {
 })
 
 
-const mongoose = require("mongoose")
-const User = require('./models/User.js')
+
 
 
 
@@ -54,14 +59,14 @@ app.get('/', (req,res) => {
 
 
 
-const authController = require('./controllers/auth.js')
+
 app.use('/auth', authController)
 
 
-const taskController = require("./controllers/task.js")
+
 app.use('/tasks', isLoggedIn, taskController)
 
-const calendarController = require('./controllers/calendar.js')
+
 app.use('/calendars', isLoggedIn, calendarController)
 
 
