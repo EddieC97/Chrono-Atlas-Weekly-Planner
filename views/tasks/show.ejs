@@ -3,18 +3,18 @@
 
 <h2> Title: <%= task.title %></h2>
 
-<h2>Description:
+<h3 class="noStyle">Description:
     <% for (description of task.description) { %>
         <%= description.type %>
     <% } %>
-</h2>
+</h3>
 
-<h2>Category: <%= task.category %></h2>
+<h3 class="noStyle">Category: <%= task.category %></h3>
 
 <% if (task.category === "calendar tasks") { %>
 
-    <h2>Week assigned:<%= task.week %></h2>
-    <h2>Day assigned: <%= task.day %></h2>
+    <h3 class="noStyle">Week assigned:<%= task.week %></h3>
+    <h3 class="noStyle">Day assigned: <%= task.day %></h3>
 
 <% } %>
 

@@ -1,26 +1,17 @@
 <%- include('../partials/header') %>
 
+<h2>List of created weeks</h2>
 
-<h2>All Weeks</h2>
+<ol>
+  <% for (const week of weekIndex) { %>
 
-
-
-
-
-<ul>
-    <% for (const week of weekIndex) { %>
-
-    <li>
+  <li>
     <a href="/calendars/<%= week.id %>">
-        <h3>Title: <%= week.title %></h3>
+      <h3>Title: <%= week.title %></h3>
     </a>
-    </li>
+  </li>
 
-    <% } %>
-</ul>
-
-
-
-
+  <% } %>
+</ol>
 
 <%- include ('../partials/footer') %>
