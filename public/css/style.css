@@ -76,3 +76,21 @@ tr {
     font-size: 1.5 rem;
 }
 
+.deleteButton {
+    background-color: red;
+    color:white;
+    border-color: black;
+}
+
+.editButton {
+    background-color:teal;
+    color:white;
+    border-color: black;
+
+}
+
+.createButton {
+    background-color: green;
+    color:white;
+    border-color: black;
+}
