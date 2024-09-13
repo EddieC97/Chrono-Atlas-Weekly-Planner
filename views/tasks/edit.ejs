@@ -1,80 +1,64 @@
 <%- include('../partials/header')  %>
+<div class="formContainer">
+    <h2> Edit your task here</h2>
+
+    <form action="/tasks/<%=task.id %>?_method=put" method="post">
 
 
-
-
-
-
-<h2> Edit your task here</h2>
-
-<form action="/tasks/<%=task.id %>?_method=put" method="post">
-
-
-
-
-
-
-<% if(locals.errorMessage) { %>
-    <div class="Error">
-        <%= locals.errorMessage  %>
-    </div>
-<% } %>
-
-
-
-
-
-<label for="Title"> Title:</label>
-<input type="text" id="titleInput" name="title" value="<%= task.title  %>">
-
-
-<label for="Description"> Description:</label>
-<input type="text" id="DescriptionInput" name="description" value="<%= task.description[0].type %>">
-
-<label for="category" > Please select where you would like to store the task</label>
-<select id="category" name="category" onchange="toggleCalendarForm()">
-    <option value="2nd brain" <%= task.category === '2nd brain' ? 'selected' : '' %>>2nd brain category </option>
-    <option value="weekly tasks" <%= task.category === 'weekly tasks' ? 'selected' : '' %>>Weekly task category </option>
-    <% if(weeksAvailable.length > 0) { %>
-    <option value="calendar tasks" <%= task.category === 'calendar tasks' ? 'selected' : '' %> > Calendar task category </option>
+    <% if(locals.errorMessage) { %>
+        <div class="Error">
+            <%= locals.errorMessage  %>
+        </div>
     <% } %>
-</select>
 
-    <div id="calendarOptions" style="display: <%= task.category === 'calendar tasks' ? 'block' : 'none'  %>">
-        <label for="week">Select a week:</label>
-        <select id="week" name="week" >
-            <option value="" disabled >Please select an option </option>
+
+
+    <label for="Title"> Title:</label>
+    <input type="text" id="titleInput" name="title" value="<%= task.title  %>">
+
+
+    <label for="Description"> Description:</label>
+    <input type="text" id="DescriptionInput" name="description" value="<%= task.description[0].type %>">
+
+    <label for="category" > Please select where you would like to store the task</label>
+    <select id="category" name="category" onchange="toggleCalendarForm()">
+        <option value="2nd brain" <%= task.category === '2nd brain' ? 'selected' : '' %>>2nd brain category </option>
+        <option value="weekly tasks" <%= task.category === 'weekly tasks' ? 'selected' : '' %>>Weekly task category </option>
+        <% if(weeksAvailable.length > 0) { %>
+        <option value="calendar tasks" <%= task.category === 'calendar tasks' ? 'selected' : '' %> > Calendar task category </option>
+        <% } %>
+    </select>
+
+        <div id="calendarOptions" style="display: <%= task.category === 'calendar tasks' ? 'block' : 'none'  %>">
+            <label for="week">Select a week:</label>
+            <select id="week" name="week" >
+                <option value="" disabled >Please select an option </option>
+                
+                <% for(week of weeksAvailable) { %>
+                    <option value="<%= week.title %>" <%= week.title === task.week ? 'selected' : '' %>><%= week.title %> </option>
+                <% } %>
+            </select>
             
-            <% for(week of weeksAvailable) { %>
-                <option value="<%= week.title %>" <%= week.title === task.week ? 'selected' : '' %>><%= week.title %> </option>
-            <% } %>
-        </select>
+            <label for="day">Select a day</label>
+            <select id="day" name="day">
+                <option value="" disabled  >Please select a day </option>
+                <option value="Monday" <%= task.day === "Monday" ? 'selected' : '' %>>Monday</option>
+                <option value="Tuesday" <%= task.day === "Tuesday" ? 'selected' : '' %> >Tuesday</option>
+                <option value="Wednesday" <%= task.day === "Wednesday" ? 'selected' : '' %>>Wednesday</option>
+                <option value="Thursday" <%= task.day === "Thursday" ? 'selected' : '' %> >Thursday</option>
+                <option value="Friday" <%= task.day === "Friday" ? 'selected' : '' %>>Friday</option>
+                <option value="Saturday" <%= task.day === "Saturday" ? 'selected' : '' %>>Saturday</option>
+                <option value="Sunday" <%= task.day === "Sunday" ? 'selected' : '' %>>Sunday</option>
+            </select>
         
-        <label for="day">Select a day</label>
-        <select id="day" name="day">
-            <option value="" disabled  >Please select a day </option>
-            <option value="Monday" <%= task.day === "Monday" ? 'selected' : '' %>>Monday</option>
-            <option value="Tuesday" <%= task.day === "Tuesday" ? 'selected' : '' %> >Tuesday</option>
-            <option value="Wednesday" <%= task.day === "Wednesday" ? 'selected' : '' %>>Wednesday</option>
-            <option value="Thursday" <%= task.day === "Thursday" ? 'selected' : '' %> >Thursday</option>
-            <option value="Friday" <%= task.day === "Friday" ? 'selected' : '' %>>Friday</option>
-            <option value="Saturday" <%= task.day === "Saturday" ? 'selected' : '' %>>Saturday</option>
-            <option value="Sunday" <%= task.day === "Sunday" ? 'selected' : '' %>>Sunday</option>
-        </select>
-    
-    </div>
+        </div>
+
+
+    <button class="editButton">Edit your tasks!</button>
 
 
 
-
-
-
-
-<br>
-<button class="editButton">Edit your tasks!</button>
-
-
-
-</form>
+    </form>
+</div>
 
 <%- include ('../partials/footer')  %>

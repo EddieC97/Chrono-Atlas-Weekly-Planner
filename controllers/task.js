@@ -90,10 +90,7 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   const task = await Task.find()
-  //! if i tried to do task.owner then it doesn't work
-
-
-  //* cannot read properties of null(reading: 'owner')
+ 
 
   const secondBrain = await Task.find({
     category: `2nd brain`,
@@ -125,6 +122,7 @@ router.get("/:id", async (req, res) => {
     return;
   }
 });
+
 
 //* UPDATE
 
@@ -175,6 +173,7 @@ router.put("/:id", async (req, res) => {
     return;
   }
 });
+
 
 //* DELETE
 
