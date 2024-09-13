@@ -49,9 +49,7 @@ router.post("/", async (req, res) => {
   if (invalidCategory) {
     res.render("tasks/new.ejs", {
       weeksAvailable,
-      errorMessage: `Please select a week and day prior to creating your tas
-            or Alternatively, please select either the 
-            2nd brain category or weekly task category`,
+      errorMessage: `Please choose a week and day before creating your task. Alternatively, you can select either the "2nd Brain" category or the "Weekly Tasks" category.`,
       title: req.body.title,
       description: [descriptionData],
       category: req.body.category,

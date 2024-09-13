@@ -16,7 +16,6 @@ app.use(express.static("public"))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-
 app.use(methodOverride ("_method", {methods: ['POST', 'GET']}))
 
 require("dotenv").config()
@@ -24,10 +23,6 @@ require("dotenv").config()
 app.listen(process.env.PORT, () => {
     console.log('server listening on http://localhost:3000')
 })
-
-
-
-
 
 app.use(session ({
     secret:process.env.SESSION_SECRET, 
@@ -41,11 +36,6 @@ app.use((req, res, next) => {
     next()
 })
 
-
-
-
-
-
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('open', () => {
     console.log('connected to MONGO!')
@@ -56,20 +46,11 @@ app.get('/', (req,res) => {
     res.render('home.ejs')
 })
 
-
-
-
-
 app.use('/auth', authController)
-
-
 
 app.use('/tasks', isLoggedIn, taskController)
 
-
 app.use('/calendars', isLoggedIn, calendarController)
-
-
 
 function isLoggedIn (req,res,next) {
 

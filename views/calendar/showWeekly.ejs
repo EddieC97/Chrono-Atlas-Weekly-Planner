@@ -1,10 +1,7 @@
 <%- include('../partials/header') %>
 
-
 <h2>Week Title: <%= week.title%> </h2> 
 
-
-</form>
 
 <table>
     <div class="calendar">
@@ -33,94 +30,94 @@
         </thead>
     </div>
 
-<tbody>
-    <tr>
-        <div class ="task-container">
-            <td id="monday">
-                <ol>
-                    <% for( task of tasksByDay.Monday) { %>
-                        <li>
-                            <a href="/tasks/<%= task.id %>">
-                                <%=  task.title %>
-                            </a>      
-                        </li>
-                    <% } %>
-                </ol>
-            </td>
-            <td id="tuesday">
-                <ol>
-                    <% for (task of tasksByDay.Tuesday) { %>
-                        <li>
-                            <a href="/tasks/<%= task.id %>">
-                                <%=  task.title %>
-                            </a>   
-                        </li>
-                    <% } %>
-                </ol>
-            </td>
-            <td id="wednesday">
-                <ol>
-                    <% for( task of tasksByDay.Wednesday) { %>
-                        <li>
-                            <a href="/tasks/<%= task.id %>">
-                                <%=  task.title %>
-                            </a>   
-                        </li>
+    <tbody>
+        <tr>
+            <div class ="task-container">
+                <td id="monday">
+                    <ol>
+                        <% for( task of tasksByDay.Monday) { %>
+                            <li>
+                                <a href="/tasks/<%= task.id %>">
+                                    <%=  task.title %>
+                                </a>      
+                            </li>
                         <% } %>
-                </ol>
-            </td>
-            <td id="thursday">
-                <ol>
-                    <% for( task of tasksByDay.Thursday) { %>
-                        <li>
-                            <a href="/tasks/<%= task.id %>">
-                                <%=  task.title %>
-                            </a>  
-                        </li>
+                    </ol>
+                </td>
+                <td id="tuesday">
+                    <ol>
+                        <% for (task of tasksByDay.Tuesday) { %>
+                            <li>
+                                <a href="/tasks/<%= task.id %>">
+                                    <%=  task.title %>
+                                </a>   
+                            </li>
                         <% } %>
-                </ol>
-                
-            </td>
-            <td id="friday">
-                <ol>
-                    <% for( task of tasksByDay.Friday) { %>
-                        <li>
-                            <a href="/tasks/<%= task.id %>">
-                                <%=  task.title %>
-                            </a>  
-                        </li>
-                        <% } %>
-                </ol>
-            </td>
-            <td id="saturday">
-                <ol>
-                    <% for( task of tasksByDay.Saturday) { %>
-                        <li>
-                            <a href="/tasks/<%= task.id %>">
-                                <%=  task.title %>
-                            </a>  
-                        </li>
-                        <% } %>
-                </ol>
-            </td>
-            <td id="sunday">
-                <ol>
-                    <% for( task of tasksByDay.Friday) { %>
-                        <li>
-                            <a href="/tasks/<%= task.id %>">
-                                <%=  task.title %>
-                            </a>  
-                        </li>
-                        <% } %>
-                </ol>
-            </td>
-        </div>
-    </tr>
-</tbody>
+                    </ol>
+                </td>
+                <td id="wednesday">
+                    <ol>
+                        <% for( task of tasksByDay.Wednesday) { %>
+                            <li>
+                                <a href="/tasks/<%= task.id %>">
+                                    <%=  task.title %>
+                                </a>   
+                            </li>
+                            <% } %>
+                    </ol>
+                </td>
+                <td id="thursday">
+                    <ol>
+                        <% for( task of tasksByDay.Thursday) { %>
+                            <li>
+                                <a href="/tasks/<%= task.id %>">
+                                    <%=  task.title %>
+                                </a>  
+                            </li>
+                            <% } %>
+                    </ol>
+                    
+                </td>
+                <td id="friday">
+                    <ol>
+                        <% for( task of tasksByDay.Friday) { %>
+                            <li>
+                                <a href="/tasks/<%= task.id %>">
+                                    <%=  task.title %>
+                                </a>  
+                            </li>
+                            <% } %>
+                    </ol>
+                </td>
+                <td id="saturday">
+                    <ol>
+                        <% for( task of tasksByDay.Saturday) { %>
+                            <li>
+                                <a href="/tasks/<%= task.id %>">
+                                    <%=  task.title %>
+                                </a>  
+                            </li>
+                            <% } %>
+                    </ol>
+                </td>
+                <td id="sunday">
+                    <ol>
+                        <% for( task of tasksByDay.Friday) { %>
+                            <li>
+                                <a href="/tasks/<%= task.id %>">
+                                    <%=  task.title %>
+                                </a>  
+                            </li>
+                            <% } %>
+                    </ol>
+                </td>
+            </div>
+        </tr>
+    </tbody>
 </table>
 
 <a href="/calendars/<%= week.id %>/edit">Edit this week</a>
-<br>
+
 <form action="/calendars/<%= week.id %>?_method=delete" method="post">
     <button class="deleteButton">Delete this week</button>
     <p>**Please note that any tasks assigned to this week will be moved to the 2nd Brain category. To completely remove everything, including the week itself, make sure to delete the individual tasks first!</p>
