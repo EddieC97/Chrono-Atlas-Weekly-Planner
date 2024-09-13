@@ -86,7 +86,7 @@ router.post("/", async (req, res) => {
 });
 
 //* READ
-//TODO - fix the rest of the routes
+
 
 router.get("/", async (req, res) => {
   const task = await Task.find()
@@ -194,7 +194,4 @@ router.delete("/:id", async (req, res) => {
 
 module.exports = router;
 
-//TODO - figure out how to protect read routes: user1a can't see user2a stuff
-//* I think it is already protected so double check that because
-//* I can't see user2a stuff when logged in as user1a
 

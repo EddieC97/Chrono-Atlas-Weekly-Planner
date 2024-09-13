@@ -59,7 +59,7 @@ router.post('/', async (req,res) => {
 
 //* READ
 
-router.get('/', async (req,res) => { //TODO- add validation to this 
+router.get('/', async (req,res) => { 
     const weekIndex = await Calendar.find({
         owner:req.session.user.id
     })
@@ -312,7 +312,7 @@ router.delete('/:id', async (req,res) => {
     }
 })
 
-//TODO- add validation for to check for req.session.user
+
 
 
 module.exports = router;
