@@ -127,6 +127,22 @@ h1 {
     
 }
 
+h2 {
+    text-decoration: underline;
+    font-size: 1.5rem;
+    margin-bottom:1 rem;
+    font-weight:bold;
+}
+
+h3 { 
+    text-decoration: underline;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight:bold;
+
+
+}
+
 nav a {
     color:blue;
     font-size:1.5rem;
