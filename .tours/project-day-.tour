@@ -1,5 +1,31 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
   "title": "Project day ",
-  "steps": []
+  "steps": [
+    {
+      "file": "controllers/calendar.js",
+      "description": "This is where things get interesting with using the date-fns function to generate the dates for the rest of the week\n- used the isValid function to check if the date is a valid date \n- used startOftheWeek to get the first day of the week so the dates will always be correct ",
+      "line": 73
+    },
+    {
+      "file": "controllers/calendar.js",
+      "description": "I need to figure out a way to be more sepcific so it doesn't get cought in another route so I added /day in front",
+      "line": 170
+    },
+    {
+      "file": "controllers/calendar.js",
+      "description": "This was interesting because not only we need to update the week but we also needed to update the tasks allocated in that week\n-so we need to find the week \n-then find all the tasks allocated to that week\n    -when we update/edit the week, we also change the week allocated to that task\n- not a very good way of updating things (should have just reference the id of the task)\n",
+      "line": 222
+    },
+    {
+      "file": "controllers/calendar.js",
+      "description": "Same thing here with the delete route for weeks\n-the idea is if a user decided to delete a week, all the tasks assigned that that week will be shifted to the 2nd brain category because if we didn't do that then in theory the tasks will be lost to the void\n    -what is happening is when we are deleting the week\n    -we also find the tasks associated to that week and unset the week and day category and change the category to 2nd brain category \n-(not a good way of deleting and updating: should have referenced the id instead)",
+      "line": 281
+    },
+    {
+      "file": "public/css/style.css",
+      "description": "I found this property: overflow-y that enables a vertical scroll option( basically add a vertical scrollbar if there are too many contents in the container)",
+      "line": 73
+    }
+  ]
 }
